@@ -185,12 +185,12 @@ img {
   .ProjetosFFA {
     text-align: center;
   }
-  .title {
+  /*.title {
     display: block;
-  }
-  .title-link {
+  }*/
+  /* .title-link {
     display: none;
-  }
+  } */
   .container {
     height: 70vh;
     width: 90vw;
