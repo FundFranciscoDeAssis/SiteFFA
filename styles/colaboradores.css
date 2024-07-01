@@ -1,0 +1,89 @@
+
+/* Foto dos Colaboradores*/
+.todos-colab{
+     margin-top: 3rem;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: self-start;
+     width: 100%;
+ }
+ .todos-colab-alem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: self-start;
+    width: 100%;
+}
+
+.linha-colaboradores{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--cor-principal);
+    text-align: center;
+    color: var(--cor-fundo);
+    font-family: var(--fonte-principal);
+    padding: 2em;
+}
+.linha-colaboradores-titulo{
+    font-family: var(--fonte-logo);
+    font-size: 40px;
+}
+
+.setor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--fonte-principal);
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--cor-principal);
+    text-align: center;
+}
+.foto-colab{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 4rem 3rem;
+    gap: 3rem;
+}
+
+.foto-colab-coluna{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.foto-colab-solo{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: var(--fonte-principal);
+    font-size: 18px;
+    color: var(--cor-principal);
+}
+.foto-colab-foto{
+    border-radius: 10px;
+    height: 400px;
+}
+
+@media (width <= 1250px){
+    .foto-colab{
+        padding: 4em 0.5em;
+    }
+    .foto-colab-foto{
+        height: 300px;
+    }
+}
+
+@media (width <= 1000px){
+    .foto-colab-coluna{
+        flex-direction: column;
+    }
+    .foto-colab-solo{
+        margin: 2em;
+    }
+}

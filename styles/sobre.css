@@ -1,0 +1,53 @@
+.sobre{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--cor-principal);
+    text-align: center;
+    color: var(--cor-fundo);
+    font-family: var(--fonte-principal);
+    height: 100vh;
+}
+.sobre-titulo{
+    font-size: 40px;
+}
+.sobre-texto{
+    padding: 4rem 8rem;
+    font-size: 20px;
+}
+.sobre-botao{
+    display: flex;
+    align-items: initial;
+    padding-left: 8rem;
+}
+.sobre-botao-saibamais{
+    font-size: 20px;
+    padding: 0.7rem 5rem;
+    border-radius: 10px;
+    background-color: var(--cor-rodape);
+    text-decoration: none;
+    color: var(--cor-principal);
+    transition: .3s;
+}
+.sobre-botao-saibamais:hover{
+    background-color: rgb(216, 207, 207);
+}
+
+
+@media (max-width: 780px) {
+    .sobre-titulo{
+        font-size: 25px;
+    }
+    .sobre-texto{
+        padding: 2rem;
+        font-size: 15px;
+    }
+    .sobre-botao{
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+    }
+    .sobre-botao-saibamais{
+        padding: 0.7rem 2rem;
+    }
+}

@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.logoimg {
+  height: 36px;
+  width: 36px;
+}
+
+.subtitulo_projetos {
+  color: #153448;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.container {
+  width: 100%;
+  width: 48.75rem;
+  height: 340px;
+  display: flex;
+  gap: 10px;
+  margin-inline: 50px;
+}
+
+.ProjetosFFA {
+  padding: 3rem 0;
+  gap: 1rem;
+  font-family: var(--fonte-principal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  display: none;
+  color: var(--cor-fundo);
+}
+.title-link {
+  text-decoration: none;
+  color: var(--cor-fundo);
+  font-weight: 600;
+}
+
+#fundmaker,
+#makerkids,
+#fundlab,
+#informatica,
+#capoeira,
+#vozeviolao,
+#nestechao,
+#reciclart,
+#colorindoacidade,
+#alemdabola,
+#coloniadeferias,
+#iniciacaoaomercadodetrabalho,
+#jovemaprendiz,
+#capacitacaoprofissional,
+#podcast,
+#mulheresativas,
+#alemdotatame,
+#ballet,
+#treino60,
+#ndfuncional {
+  scroll-margin-top: 7em;
+}
+
+.card {
+  min-width: 70px;
+  height: 90%;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  flex-grow: 1;
+  cursor: pointer;
+  position: relative;
+  transition: flex-grow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-timing: 0.35s;
+}
+
+.card:hover {
+  flex-grow: 7;
+}
+
+.card > .background {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.4);
+  z-index: -1;
+  transition: var(--transition-timing) ease;
+}
+.card:hover > .background {
+  filter: brightness(1);
+}
+
+.card > .card-content {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 20px;
+  overflow: hidden;
+  transition: var(--transition-timing);
+  z-index: 10;
+}
+.card:hover > .card-content {
+  inset: 20px;
+  top: auto;
+}
+
+.card-content > * {
+  transition: var(--transition-timing);
+}
+
+.card-content > .profile-image {
+  min-width: 50px;
+  max-width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.card:hover .profile-image {
+  border: 1px solid rgb(110, 252, 205);
+}
+.profile-image > svg {
+  stroke: #fefefe;
+}
+.card:hover .profile-image > svg {
+  stroke: rgb(110, 252, 205);
+}
+
+.card-content > .title {
+  margin-left: 10px;
+  translate: 0 100%;
+  opacity: 0;
+}
+.card:hover .title {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.card-content > .title-link {
+  margin-left: 10px;
+  translate: 0 100%;
+  opacity: 0;
+}
+.card:hover .title-link {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.card > .backdrop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  z-index: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+}
+
+@media (width <= 800px) {
+  /* Carrosel Mobile*/
+  .ProjetosFFA {
+    text-align: center;
+  }
+  .title {
+    display: block;
+  }
+  .title-link {
+    display: none;
+  }
+  .container {
+    height: 70vh;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-inline: 50px;
+  }
+  .card {
+    min-height: 40px;
+    width: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: flex-end;
+    flex-grow: 1;
+    cursor: pointer;
+    position: relative;
+    transition: flex-grow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+    --transition-timing: 0.35s;
+  }
+  .card > .card-content {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: 2px;
+    overflow: hidden;
+    transition: var(--transition-timing);
+    z-index: 10;
+  }
+  .card-content > .title {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card > .background {
+    object-position: center 30%;
+  }
+  .card:hover > .card-content {
+    inset: 15px;
+    top: auto;
+  }
+}

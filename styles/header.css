@@ -1,0 +1,268 @@
+/*Cor de fundo e espaçamento Geral*/
+.cabecalho{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-header);
+    z-index: 99999;
+}
+/*Logo e fonte-logo*/
+.cabecalho-logo{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    text-align: center;
+    color: var(--cor-fundo);
+    padding: 0 3em;
+}
+.cabecalho-logo img{
+    width: 70px;
+}
+.cabecalho-logo h1 b{
+    font-weight: 600;
+}
+/*Navegação do cabeçalho*/
+.cabecalho-nav{
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+    padding: 0.5em 0;
+    padding-right: 3em;
+}
+.cabecalho-nav-item{
+    text-align: center;
+    font-family: var(--fonte-logo);
+    font-size: 22px;
+    font-weight: 600;
+    padding: 0.7em;
+    border-radius: 5px;
+    color: var(--cor-fundo);
+    text-decoration: none;
+    transition: .2s;
+    cursor: pointer;
+}
+.cabecalho-nav-item:hover{
+    transform: scale(1.1);
+}
+/*backdrops*/
+/*Projetos*/
+.cabecalho-nav-projetos-drop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.projetos-drop{
+    display: none;
+    position: absolute;
+    margin-top: 60px;
+    animation: animacao .1s ease;
+}
+.cabecalho-nav-projetos-drop:hover > .projetos-drop{
+    display: block;
+}
+.projetos-drop-lista{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    background-color: var(--cor-header);
+    border-radius: 0 0 10px 10px;
+    padding: 5px 10px;
+}
+.projetos-drop li{
+    list-style: none;
+    padding: 0.7em 1px;
+    border-radius: 10px;
+    transition: .2s;
+}
+.projetos-drop li:hover{
+    border-bottom: 2px solid var(--cor-fundo);
+}
+.projetos-drop a{
+    color: var(--cor-fundo);
+    font-size: 20px;
+    text-decoration: none;
+}
+/*Contatos*/
+.cabecalho-nav-contatos-drop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contatos-drop{
+    display: none;
+    position: absolute;
+    margin-top: 63px;
+    animation: animacao .3s ease;
+}
+.cabecalho-nav-contatos-drop:hover > .contatos-drop{
+    display: block;
+}
+.contatos-drop-lista{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    background-color: var(--cor-header);
+    border-radius: 0 0 10px 10px;
+    padding: 5px 10px;
+}
+.contatos-drop li{
+    list-style: none;
+    padding: 0.7em 1px;
+    border-radius: 10px;
+    transition: .2s;
+}
+.contatos-drop li:hover{
+    border-bottom: 2px solid var(--cor-fundo);
+}
+.contatos-drop a{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    color: var(--cor-fundo);
+    font-size: 20px;
+    text-decoration: none;
+}
+.contatos-drop img{
+    width: 18px;
+}
+/*Mobile desativado pc*/
+.btnMenu{
+    display: none;
+    border-radius: 10px;
+
+    &:hover{
+        background-color: var(--cor-principal);
+    }
+}
+.cabecalho-nav-mobile{
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100vh;
+    background-color: var(--cor-header);  
+    z-index: 9999;
+    animation: menuH .1s linear; 
+}
+.overlay{
+    display: none;
+    position: fixed;
+    background-color: rgba(32, 30, 30, 0.518);
+    height: 110%;
+    width: 100vw;
+    z-index: 88888;
+}
+.active{
+    display: block;
+}
+.cabecalho-nav-mobile-exit{
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    padding: 10px;
+    border-radius: 50px;
+}
+.cabecalho-nav-mobile-lista{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.cabecalho-nav-mobile-item{
+    text-decoration: none;
+    color: var(--cor-fundo);
+    font-size: 18px;
+    text-align: center;
+}
+.cabecalho-nav-mobile-linha{
+    color: var(--cor-fundo);
+    width: 100%;
+    font-weight: 100;
+}
+.cabecalho-nav-mobile ul{
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.cabecalho-nav-mobile li a{
+    text-decoration: none;
+    color: var(--cor-fundo);
+    font-size: 14px;
+    padding: 5px 3em;
+    border-radius: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--cor-principal);
+}
+.cabecalho-nav-mobile-lista-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cabecalho-nav-mobile-link{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+.img-contato{
+    width: 20px;
+}
+
+@keyframes animacao {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+@keyframes menuH {
+    from{
+        width: 0;
+    }
+}
+@media (width <= 915px){
+    .cabecalho-nav{
+        gap: 2em;
+    }
+    .cabecalho-nav-item{
+        font-size: 18px;
+    }
+}
+@media (width <= 800px){
+    .cabecalho-logo{
+        padding: 0 1em;
+    }
+    .cabecalho-nav{
+        display: none;
+    }
+    .btnMenu{
+        display: block;
+        background-color: transparent;
+        border: none; 
+    }
+    .btnFechar{
+        background-color: transparent;
+        border: 0;
+        width: 10%;
+    }
+    .nav-mobile-menu{
+        display: block;
+        width: 40px;
+        margin-right: 1em;
+    }   
+}
+@media (width <= 400px){
+    .cabecalho-nav-mobile{
+        width: 72%;
+    }
+}

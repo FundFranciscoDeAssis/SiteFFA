@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="website icon" href="img/logodouradafund.png" />
+    <title>Fundação FA</title>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <!--Header-->
+    <header class="cabecalho">
+      <!--Logo-->
+      <div class="cabecalho-logo">
+        <a href="index.html">
+          <img
+            src="img/LogoFundBranca.svg"
+            alt="Logo da Fundação Francisco de Assis"
+          />
+        </a>
+      </div>
+      <!--Navegação-->
+      <!--Sobre-->
+      <div class="cabecalho-nav">
+        <a href="sobre.html" class="cabecalho-nav-item">Sobre nós</a>
+        <!--Projetos-->
+        <section class="cabecalho-nav-projetos-drop">
+          <a class="cabecalho-nav-item">Projetos</a>
+          <div class="projetos-drop">
+            <ul class="projetos-drop-lista">
+              <li>
+                <a href="projetos_html/inclusao.html">Inclusão Digital</a>
+              </li>
+              <li>
+                <a href="projetos_html/socio_cultural.html"
+                  >Socio-Cultural/Ambiental</a
+                >
+              </li>
+              <li>
+                <a href="projetos_html/socio_recreativo.html"
+                  >Socio-Recreativos</a
+                >
+              </li>
+              <li>
+                <a href="projetos_html/socio_educacional.html"
+                  >Socio-Educacional</a
+                >
+              </li>
+              <li><a href="projetos_html/geracao.html">Geração Cidadã</a></li>
+              <li>
+                <a href="projetos_html/cessao_de_espaco.html"
+                  >Cessão de Espaço</a
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+        <!--Colaboradores-->
+        <a href="colaboradores.html" class="cabecalho-nav-item"
+          >Colaboradores</a
+        >
+        <!--Contatos-->
+        <section class="cabecalho-nav-contatos-drop">
+          <a class="cabecalho-nav-item">Contatos</a>
+          <div class="contatos-drop">
+            <ul class="contatos-drop-lista">
+              <li>
+                <a
+                  href="https://www.instagram.com/fundfranciscodeassis/"
+                  target="_blank"
+                  ><img
+                    src="img/instagram.svg"
+                    alt="logo do Instagram"
+                  />Instagram</a
+                >
+              </li>
+              <li>
+                <a href="https://wa.me/3138381235" target="_blank"
+                  ><img src="img/wpp.svg" alt="logo do Whatsapp" />Whatsapp</a
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <button class="btnMenu">
+        <img class="nav-mobile-menu" src="img/menu.svg" alt="menu hamburguer" />
+      </button>
+      <div class="cabecalho-nav-mobile">
+        <section class="cabecalho-nav-mobile-lista">
+          <button class="btnFechar">
+            <img
+              src="img/exit.svg"
+              alt="botão de fechar"
+              class="cabecalho-nav-mobile-exit"
+            />
+          </button>
+          <a href="sobre.html" class="cabecalho-nav-mobile-item">Sobre nós</a>
+          <hr class="cabecalho-nav-mobile-linha" />
+          <a class="cabecalho-nav-mobile-item">Projetos</a>
+          <ul>
+            <li><a href="projetos_html/inclusao.html">Inclusão Digital</a></li>
+            <li>
+              <a href="projetos_html/socio_cultural.html"
+                >Socio-Cultural/Ambiental</a
+              >
+            </li>
+            <li>
+              <a href="projetos_html/socio_recreativo.html"
+                >Socio-Recreativos</a
+              >
+            </li>
+            <li>
+              <a href="projetos_html/socio_educacional.html"
+                >Socio-Educacional</a
+              >
+            </li>
+            <li><a href="projetos_html/geracao.html">Geração Cidadã</a></li>
+            <li>
+              <a href="projetos_html/cessao_de_espaco.html">Cessão de Espaço</a>
+            </li>
+          </ul>
+          <hr class="cabecalho-nav-mobile-linha" />
+          <a class="cabecalho-nav-mobile-item" href="colaboradores.html"
+            >Colaboradores</a
+          >
+          <hr class="cabecalho-nav-mobile-linha" />
+          <a class="cabecalho-nav-mobile-item">Contatos</a>
+          <ul class="cabecalho-nav-mobile-lista-cont">
+            <li>
+              <a
+                href="https://www.instagram.com/fundfranciscodeassis/"
+                target="_blank"
+                class="cabecalho-nav-mobile-link"
+                ><img
+                  class="img-contato"
+                  src="img/instagram.svg"
+                  alt="logo do Instagram"
+                />Instagram</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://wa.me/3138381235"
+                target="_blank"
+                class="cabecalho-nav-mobile-link"
+                ><img
+                  class="img-contato"
+                  src="img/wpp.svg"
+                  alt="logo do Whatsapp"
+                />Whatsapp</a
+              >
+            </li>
+          </ul>
+          <hr class="cabecalho-nav-mobile-linha" />
+        </section>
+      </div>
+    </header>
+
+    <!--Guia Inicial-->
+    <section class="foto-fund">
+      <div class="foto-fund-texto">
+        <h2>
+          Fundação<br /><b class="foto-fund-b">Francisco de<br />Assis</b>
+        </h2>
+        <h3>Por um novo Mundo</h3>
+      </div>
+    </section>
+    <!-- Guia Sobre nós -->
+    <section class="sobre">
+      <h2 class="sobre-titulo">Sobre nós</h2>
+      <p class="sobre-texto">
+        A Fundação Francisco de Assis, atua no Município de Santa Maria de
+        Itabira – MG e região ofertando a demanda de crianças a 3ª idade, 20
+        projetos, sendo a maioria deles voltados para a inclusão digital,
+        inovação e tecnologia. Nestes 17 anos de existência a Fundação Francisco
+        de Assis tem promovido a inclusão social, utilizando as tecnologias da
+        informação como instrumento para a construção da cidadania, contribuindo
+        para a transformação de vidas e desenvolvimento comunitário sendo
+        parceira do Município de Santa Maria de Itabira – MG, nos projetos
+        Inclusão Digital da Educação Infantil ao Ensino Fundamental Anos
+        Iniciais, Programa de Monitoramento e Intervenção Pedagógica SAME/SMI,
+        IMT- Iniciação ao Mercado de Trabalho e Programa Jovem Aprendiz.
+      </p>
+      <div class="sobre-botao">
+        <a href="sobre.html" class="sobre-botao-saibamais">Saiba Mais</a>
+      </div>
+    </section>
+    <section class="ProjetosFFA">
+      <!-- Inclusão Digital -->
+      <h2 class="subtitulo_projetos">Inclusão Digital</h2>
+      <div class="container">
+        <!-- FundMaker -->
+        <div class="card">
+          <img class="background" src="./assets/Maker.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Maker.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a class="title-link" href="/projetos_html/inclusao.html#fundmaker"
+              >FundMaker</a
+            >
+            <h3 class="title">FundMaker</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Maker Kids -->
+        <div class="card">
+          <img class="background" src="./assets/FundMaker Kids.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Maker Kids.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a class="title-link" href="/projetos_html/inclusao.html#makerkids"
+              >Maker Kids</a
+            >
+            <h3 class="title">Maker Kids</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- FundLab -->
+        <div class="card">
+          <img class="background" src="./assets/FundLab.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo FUNDlab.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a class="title-link" href="/projetos_html/inclusao.html#fundlab"
+              >FundLab</a
+            >
+            <h3 class="title">FundLab</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Informática -->
+        <div class="card">
+          <img class="background" src="./assets/Inf. Comunidade.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo FUNDlab.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/inclusao.html#informatica"
+              >Informática</a
+            >
+            <h3 class="title">Informática</h3>
+          </div>
+
+          <div class="backdrop"></div>
+        </div>
+      </div>
+
+      <!-- SOCIO-CULTURAL/AMBIENTAL -->
+      <h2 class="subtitulo_projetos">Socio-Cultural/Ambiental</h2>
+      <div class="container">
+        <!-- Capoeira -->
+        <div class="card">
+          <img class="background" src="./assets/Capoeira.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Capoeira.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_cultural.html#capoeira"
+              >Capoeira</a
+            >
+            <h3 class="title">Capoeira</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Voz e Violão -->
+        <div class="card">
+          <img
+            class="background"
+            src="./assets/Violão.jpeg"
+            alt="Foto Maker Kids"
+          />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Maker.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_cultural.html#vozeviolao"
+              >Voz e Violao</a
+            >
+            <h3 class="title">Voz e Violão</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- NesteChão -->
+        <div class="card">
+          <img class="background" src="./assets/NesteChão.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Fund Branca.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_cultural.html#nestechao"
+              >NesteChão</a
+            >
+            <h3 class="title">NesteChão</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Reciclart -->
+        <div class="card">
+          <img class="background" src="./assets/Reciclart.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Maker.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_cultural.html#reciclart"
+              >Reciclart</a
+            >
+            <h3 class="title">Reciclart</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Colorindo a Cidade -->
+        <div class="card">
+          <img class="background" src="./assets/ColorindoCidade.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo FUNDlab.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_cultural.html#colorindoacidade"
+              >Colorindo a Cidade</a
+            >
+            <h3 class="title">Colorindo a Cidade</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+      </div>
+
+      <!-- SOCIO-RECRIATIVOS -->
+      <h2 class="subtitulo_projetos">Socio-Recreativos</h2>
+      <div class="container">
+        <!-- Além da Bola -->
+        <div class="card">
+          <img class="background" src="./assets/AlemdaBola.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo AlemdaBola.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_recreativo.html#alemdabola"
+              >Além da Bola</a
+            >
+            <h3 class="title">Além da Bola</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Colônia de Férias -->
+        <div class="card">
+          <img
+            class="background"
+            src="./assets/Colonia de Ferias.jpeg"
+            alt=""
+          />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Colonia de ferias.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_recreativo.html#coloniadeferias"
+              >Colônia de Férias</a
+            >
+            <h3 class="title">Colônia de Férias</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+      </div>
+
+      <!-- SOCIO-EDUCACIONAL -->
+      <h2 class="subtitulo_projetos">Socio-Educacional</h2>
+      <div class="container">
+        <!-- IMT -->
+        <div class="card">
+          <img class="background" src="./assets/IMT.png" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/logo Voluntários.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_educacional.html#iniciacaoaomercadodetrabalho"
+              >Iniciação ao Mercado de Trabalho</a
+            >
+            <h3 class="title">Iniciação ao Mercado de Trabalho</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Jovem Aprendiz -->
+        <div class="card">
+          <img class="background" src="./assets/JovensAprendizes.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Jovem Aprendiz.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_educacional.html#jovemaprendiz"
+              >Jovem Aprendiz</a
+            >
+            <h3 class="title">Jovem Aprendiz</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Qualificação Senac -->
+        <div class="card">
+          <img class="background" src="./assets/Curso Senac.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Senac.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/socio_educacional.html#capacitacaoprofissional"
+              >Capacitação Profissional</a
+            >
+            <h3 class="title">Capacitação Profissional</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+      </div>
+
+      <!-- GERAÇÃO CIDADÃ -->
+      <h2 class="subtitulo_projetos">Geração Cidadã</h2>
+      <div class="container">
+        <!-- Podcast -->
+        <div class="card">
+          <img class="background" src="./assets/podcast3.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Maker.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a class="title-link" href="/projetos_html/geracao.html#podcast"
+              >Podcast Criativo</a
+            >
+            <h3 class="title">Podcast</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Mulheres Ativas -->
+        <div class="card">
+          <img class="background" src="./assets/mulheresAtivas.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Maker.svg"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/geracao.html#mulheresativas"
+              >Mulheres Ativas</a
+            >
+            <h3 class="title">Mulheres Ativas</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+      </div>
+
+      <!-- CESSÃO DE ESPAÇO -->
+      <h2 class="subtitulo_projetos">Cessão de Espaço</h2>
+      <div class="container">
+        <!-- Jiu-Jitsu -->
+        <div class="card">
+          <img class="background" src="./assets/Alemdotatame.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Alem do Tatame.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/cessao_de_espaco.html#alemdotatame"
+              >Além do Tatame</a
+            >
+            <h3 class="title">Além do Tatame</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- Ballet -->
+        <div class="card">
+          <img class="background" src="./assets/Ballet.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo Ballance.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/cessao_de_espaco.html#ballet"
+              >Ballet</a
+            >
+            <h3 class="title">Ballet</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+        <!-- Treino 60+ -->
+        <div class="card">
+          <img class="background" src="./assets/Treino60.jpeg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/Logo LU.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/cessao_de_espaco.html#treino60"
+              >Treino 60+</a
+            >
+            <h3 class="title">Treino 60+</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+
+        <!-- ND Funcional -->
+        <div class="card">
+          <img class="background" src="./assets/NdFuncionalB.jpg" alt="" />
+          <div class="card-content">
+            <div class="profile-image">
+              <img
+                src="assets/NDFuncional.png"
+                alt=""
+                class="lucide lucide-gamepad-2 logoimg"
+              />
+            </div>
+            <a
+              class="title-link"
+              href="/projetos_html/cessao_de_espaco.html#ndfuncional"
+              >ND Funcional</a
+            >
+            <h3 class="title">ND Funcional</h3>
+          </div>
+          <div class="backdrop"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rodapé-->
+    <footer class="rodape">
+      <div class="rodape-div">
+        <img src="img/LogoFundCompleta.svg" alt="" class="rodape-logo" />
+        <div class="rodape-linha"></div>
+        <div class="rodape-listacompleta">
+          <ul class="rodape-lista">
+            Quem Somos
+            <li class="rodape-lista-nomes">
+              <a href="sobre.html" class="rodape-lista-itens">Sobre nós</a>
+            </li>
+          </ul>
+          <ul class="rodape-lista">
+            Acompanhe nossas Redes
+            <li class="rodape-lista-nomes">
+              <a
+                href="https://www.instagram.com/fundfranciscodeassis/"
+                class="rodape-lista-itens"
+                >Instagram</a
+              >
+            </li>
+            <li class="rodape-lista-nomes">
+              <a
+                href="https://www.facebook.com/fundfranciscodeassis"
+                class="rodape-lista-itens"
+                >Facebook</a
+              >
+            </li>
+            <li class="rodape-lista-nomes">
+              <a
+                href="https://www.tiktok.com/@fundacaomaker"
+                class="rodape-lista-itens"
+                >Tiktok</a
+              >
+            </li>
+          </ul>
+          <ul class="rodape-lista">
+            Contato
+            <li class="rodape-lista-nomes">
+              <a href="https://wa.me/3138381235" class="rodape-lista-itens"
+                >Whatsapp</a
+              >
+            </li>
+            <li class="rodape-lista-nomes">
+              <a
+                href="mailto:fundfranciscodeassis@gmail.com"
+                class="rodape-lista-itens"
+                >Email</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="rodape-direitos">
+        <p class="rodape-direitos-itens">
+          © 2024 Fundação Francisco de Assis | Todos os direitos reservados
+        </p>
+      </div>
+    </footer>
+
+    <script src="JavaScript/menu.js"></script>
+  </body>
+</html>

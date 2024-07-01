@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+
+}
+.container-projetos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5em;
+    width: 100vw;
+    height: max-content;
+    padding: 6em 0;
+    font-family: var(--fonte-principal);
+    font-weight: 300;
+}
+.inicio{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+.titulo-principal{
+    font-family: var(--fonte-principal);
+    font-weight: 600;
+    font-size: 48px;
+}
+.inicio p{
+    font-size: 23px;
+    text-align: center;
+}
+.lista_projetos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+.linha{
+    background-color: var(--cor-principal);
+    height: 1px;
+    width: 90%;
+}
+.projetos_separados{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    width: 500px;
+}
+
+.projetos_separados_titulo{
+    font-size: 36px;
+    font-family: var(--fonte-principal);
+    font-weight: 500;
+}
+.projetos_separados_texto{
+    font-size: 23px;
+}
+.projetos_separados_img{
+    width: 500px;
+    border-radius: 15px;
+    transition: 0.7s;
+}
+.projetos_separados_img:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 20px var(--cor-principal);
+}
+.projetos_separados_contato{
+    text-decoration: none;
+    font-size: 28px;
+    font-family: var(--fonte-principal);
+    font-weight: 400;
+    color: black;
+}
+
+@media (width <= 1024px){
+    .container-projetos{
+        width: 100%;
+    }
+    .projetos_separados_img{
+        width: 400px;
+    }
+}
+@media (width <= 920px){
+    .container-projetos{
+        width: 100%;
+    }
+    .projetos_separados{
+        width: 350px;
+    }
+    .projetos_separados_img{
+        width: 350px;
+    }
+}
+@media (width <= 767px){
+    .lista_projetos{
+        flex-direction: column;
+        gap: 3em;
+    }
+    .titulo-principal{
+        font-size: 36px;
+        text-align: center;
+    }
+}
+@media (width <= 360px){
+    .titulo-principal, .projetos_separados_titulo{
+        font-size: 30px;
+    }
+    .projetos_separados{
+        width: 300px;
+    }
+    .projetos_separados_img{
+        width: 300px;
+    }
+}
