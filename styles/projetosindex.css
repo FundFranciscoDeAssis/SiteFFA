@@ -45,10 +45,6 @@ img {
   flex-direction: column;
 }
 
-.title {
-  display: none;
-  color: var(--cor-fundo);
-}
 .title-link {
   text-decoration: none;
   color: var(--cor-fundo);
@@ -150,16 +146,6 @@ img {
   stroke: rgb(110, 252, 205);
 }
 
-.card-content > .title {
-  margin-left: 10px;
-  translate: 0 100%;
-  opacity: 0;
-}
-.card:hover .title {
-  opacity: 1;
-  translate: 0 0;
-}
-
 .card-content > .title-link {
   margin-left: 10px;
   translate: 0 100%;
@@ -185,12 +171,6 @@ img {
   .ProjetosFFA {
     text-align: center;
   }
-  .title {
-    display: none;
-  }
-  /* .title-link {
-    display: none;
-  } */
   .container {
     height: 70vh;
     width: 90vw;
