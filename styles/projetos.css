@@ -94,6 +94,10 @@
     .projetos_separados_img{
         width: 350px;
     }
+    .projetos_separados_texto{
+        font-size: 18px;
+        text-align: justify;
+    }
 }
 @media (width <= 767px){
     .lista_projetos{
