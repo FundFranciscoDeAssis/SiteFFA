@@ -59,6 +59,9 @@
 .projetos_separados_texto{
     font-size: 23px;
 }
+.texto-principal{
+    font-size: 23px;
+}
 .projetos_separados_img{
     width: 500px;
     border-radius: 15px;
@@ -95,6 +98,10 @@
         width: 350px;
     }
     .projetos_separados_texto{
+        font-size: 18px;
+        text-align: justify;
+    }
+    .texto-principal{
         font-size: 18px;
         text-align: justify;
     }
