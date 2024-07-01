@@ -265,4 +265,7 @@
     .cabecalho-nav-mobile{
         width: 80%;
     }
+    .cabecalho-nav-item{
+        font-size: 16px;
+    }
 }
