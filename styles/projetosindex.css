@@ -185,9 +185,9 @@ img {
   .ProjetosFFA {
     text-align: center;
   }
-  /*.title {
-    display: block;
-  }*/
+  .title {
+    display: none;
+  }
   /* .title-link {
     display: none;
   } */
