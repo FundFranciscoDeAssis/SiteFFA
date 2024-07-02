@@ -91,4 +91,8 @@
     .foto-fund h2{
         font-size: 50px;
     }
+    .foto-fund b{
+        font-size: 60px;
+        font-weight: 600;
+    }
 }
