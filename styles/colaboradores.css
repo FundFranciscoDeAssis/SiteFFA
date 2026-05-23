@@ -67,7 +67,11 @@
 }
 .foto-colab-foto{
     border-radius: 10px;
-    height: 400px;
+    width: 100%;       /* Ocupa toda a largura do container pai (.foto-colab-solo) */
+    height: auto;      /* Calcula a altura proporcionalmente (mantém o 4x3 em pé) */
+    display: block;    /* Remove espaços indesejados abaixo da imagem */
+    object-fit: normal;
+    
 }
 
 @media (width <= 1250px){
@@ -75,7 +79,7 @@
         padding: 4em 0.5em;
     }
     .foto-colab-foto{
-        height: 300px;
+        width: 50%; 
     }
 }
 
