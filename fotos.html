@@ -149,26 +149,45 @@
       </button>
     </header>
 
-    <!-- Área Principal da Galeria -->
     <main class="fotos-secao">
       <div class="fotos-card-busca">
         <h2>Busca por Reconhecimento Facial</h2>
         <p>
-          Tire uma selfie ou envie uma foto do seu rosto para encontrar suas fotos na Colônia de Férias.
+          Tire uma selfie na hora ou escolha uma foto da sua galeria para encontrar suas imagens na Colônia de Férias.
         </p>
 
-        <label for="input-selfie" class="btn-selfie-custom">
-          Tirar Selfie / Enviar Foto
-        </label>
-        <input type="file" id="input-selfie" accept="image/*" capture="user" style="display: none;" />
+        <!-- Botões Separados: Câmera vs Galeria -->
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px;">
+          <label for="input-camera" class="btn-selfie-custom">
+            Tirar Selfie
+          </label>
+
+          <label for="input-galeria" class="btn-selfie-custom" style="background-color: var(--cor-header);">
+            Escolher da Galeria
+          </label>
+        </div>
+
+        <!-- Inputs Ocultos -->
+        <input type="file" id="input-camera" accept="image/*" capture="user" style="display: none;" />
+        <input type="file" id="input-galeria" accept="image/*" style="display: none;" />
 
         <div id="status-busca" style="color: #ffffff; font-size: 1.1rem; margin-top: 20px; font-weight: 600;"></div>
+      </div>
+
+      <!-- Barra de Ações de Seleção Múltipla (Aparece ao carregar fotos) -->
+      <div id="barra-acoes" style="display: none; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 20px auto; padding: 0 20px; flex-wrap: wrap; gap: 10px;">
+        <button id="btn-selecionar-todas" class="btn-selfie-custom" style="background-color: var(--cor-principal); font-size: 0.9rem; padding: 8px 16px;">
+          Selecionar Todas
+        </button>
+        <button id="btn-baixar-selecionadas" class="btn-selfie-custom" style="background-color: var(--cor-secundaria); font-size: 0.9rem; padding: 8px 16px;">
+          Baixar Selecionadas (<span id="count-selecionadas">0</span>)
+        </button>
       </div>
 
       <!-- Grid de fotos -->
       <div id="galeria-resultados" class="fotos-grid"></div>
 
-      <!-- Botão de Paginação (Carregar Mais) -->
+      <!-- Botão de Paginação -->
       <div style="text-align: center; margin-top: 30px;">
         <button id="btn-carregar-mais" class="btn-selfie-custom" style="display: none; background-color: var(--cor-principal);">
           Carregar Mais Fotos
@@ -176,21 +195,44 @@
       </div>
     </main>
 
-    <!-- Script de Busca, Paginação e Download -->
+    <!-- Modal de Visualização em Tela Cheia -->
+    <div id="modal-foto" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); z-index: 99999; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box;">
+      <div style="position: relative; max-width: 90%; max-height: 90%; display: flex; flex-direction: column; align-items: center;">
+        <button id="btn-fechar-modal" style="position: absolute; top: -40px; right: 0; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer;">&times;</button>
+        <img id="modal-img-preview" src="" alt="Visualização" style="max-width: 100%; max-height: 75vh; border-radius: 8px; object-fit: contain; box-shadow: 0 4px 20px rgba(0,0,0,0.5);" />
+        <button id="btn-modal-baixar" class="btn-selfie-custom" style="margin-top: 15px;">Baixar Esta Foto</button>
+      </div>
+    </div>
+
+    <!-- Script Atualizado -->
     <script>
-      const inputSelfie = document.getElementById('input-selfie');
+      const inputCamera = document.getElementById('input-camera');
+      const inputGaleria = document.getElementById('input-galeria');
       const statusBusca = document.getElementById('status-busca');
       const galeriaResultados = document.getElementById('galeria-resultados');
       const btnCarregarMais = document.getElementById('btn-carregar-mais');
+      const barraAcoes = document.getElementById('barra-acoes');
+      const btnSelecionarTodas = document.getElementById('btn-selecionar-todas');
+      const btnBaixarSelecionadas = document.getElementById('btn-baixar-selecionadas');
+      const countSelecionadas = document.getElementById('count-selecionadas');
 
-      // Variáveis para controlar a paginação em memória
+      // Elementos do Modal
+      const modalFoto = document.getElementById('modal-foto');
+      const modalImgPreview = document.getElementById('modal-img-preview');
+      const btnFecharModal = document.getElementById('btn-fechar-modal');
+      const btnModalBaixar = document.getElementById('btn-modal-baixar');
+
       let todasAsFotos = [];
       let fotosExibidasCount = 0;
+      let fotosSelecionadas = new Set();
+      let urlFotoModalAtual = '';
       const FOTOS_POR_PAGINA = 12;
 
       function baixarFotoDireto(url, btnElement) {
-        btnElement.innerText = 'Baixando...';
-        btnElement.disabled = true;
+        if (btnElement) {
+          btnElement.innerText = 'Baixando...';
+          btnElement.disabled = true;
+        }
 
         const downloadProxyUrl = `/api/search-face?fileUrl=${encodeURIComponent(url)}`;
         const a = document.createElement('a');
@@ -200,33 +242,74 @@
         a.click();
         a.remove();
 
-        setTimeout(() => {
-          btnElement.innerText = 'Baixar Foto Original';
-          btnElement.disabled = false;
-        }, 1500);
+        if (btnElement) {
+          setTimeout(() => {
+            btnElement.innerText = 'Baixar Foto Original';
+            btnElement.disabled = false;
+          }, 1500);
+        }
       }
 
-      // Função que renderiza o próximo lote de fotos na tela
+      function atualizarContadorSelecao() {
+        countSelecionadas.innerText = fotosSelecionadas.size;
+      }
+
+      function abrirModal(url) {
+        urlFotoModalAtual = url;
+        modalImgPreview.src = url;
+        modalFoto.style.display = 'flex';
+      }
+
+      btnFecharModal.addEventListener('click', () => {
+        modalFoto.style.display = 'none';
+      });
+
+      modalFoto.addEventListener('click', (e) => {
+        if (e.target === modalFoto) modalFoto.style.display = 'none';
+      });
+
+      btnModalBaixar.addEventListener('click', () => {
+        if (urlFotoModalAtual) baixarFotoDireto(urlFotoModalAtual, btnModalBaixar);
+      });
+
       function renderizarProximoLote() {
         const proximoLote = todasAsFotos.slice(fotosExibidasCount, fotosExibidasCount + FOTOS_POR_PAGINA);
 
         proximoLote.forEach((url) => {
           const card = document.createElement('div');
           card.className = 'fotos-item-card';
+          card.style.position = 'relative';
 
+          // Checkbox para Seleção Múltipla
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.className = 'checkbox-foto';
+          checkbox.style.cssText = 'position: absolute; top: 18px; left: 18px; width: 22px; height: 22px; cursor: pointer; z-index: 2; accent-color: var(--cor-secundaria);';
+          checkbox.checked = fotosSelecionadas.has(url);
+
+          checkbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+              fotosSelecionadas.add(url);
+            } else {
+              fotosSelecionadas.delete(url);
+            }
+            atualizarContadorSelecao();
+          });
+
+          // Imagem com Clique para Abrir o Modal de Preview
           const imgEl = document.createElement('img');
           imgEl.src = url;
           imgEl.alt = 'Foto encontrada';
           imgEl.loading = 'lazy';
+          imgEl.style.cursor = 'pointer';
+          imgEl.addEventListener('click', () => abrirModal(url));
 
           const btnDownload = document.createElement('button');
           btnDownload.className = 'btn-baixar-foto';
           btnDownload.innerText = 'Baixar Foto Original';
+          btnDownload.addEventListener('click', () => baixarFotoDireto(url, btnDownload));
 
-          btnDownload.addEventListener('click', () => {
-            baixarFotoDireto(url, btnDownload);
-          });
-
+          card.appendChild(checkbox);
           card.appendChild(imgEl);
           card.appendChild(btnDownload);
           galeriaResultados.appendChild(card);
@@ -234,29 +317,66 @@
 
         fotosExibidasCount += proximoLote.length;
 
-        // Se ainda houverem fotos a serem exibidas, mostra o botão "Carregar Mais"
         if (fotosExibidasCount < todasAsFotos.length) {
           btnCarregarMais.style.display = 'inline-block';
         } else {
           btnCarregarMais.style.display = 'none';
         }
 
+        if (todasAsFotos.length > 0) {
+          barraAcoes.style.display = 'flex';
+        }
+
         statusBusca.innerText = `Exibindo ${fotosExibidasCount} de ${todasAsFotos.length} fotos encontradas.`;
       }
 
-      // Evento de clique no botão "Carregar Mais"
-      btnCarregarMais.addEventListener('click', () => {
-        renderizarProximoLote();
+      btnSelecionarTodas.addEventListener('click', () => {
+        const todosCheckboxes = document.querySelectorAll('.checkbox-foto');
+        const marcar = fotosSelecionadas.size < todasAsFotos.length;
+
+        todasAsFotos.forEach(url => {
+          if (marcar) fotosSelecionadas.add(url);
+          else fotosSelecionadas.clear();
+        });
+
+        todosCheckboxes.forEach(cb => cb.checked = marcar);
+        atualizarContadorSelecao();
       });
+
+      btnBaixarSelecionadas.addEventListener('click', () => {
+        if (fotosSelecionadas.size === 0) {
+          alert('Selecione ao menos uma foto para baixar.');
+          return;
+        }
+
+        btnBaixarSelecionadas.innerText = 'Baixando Selecionadas...';
+        btnBaixarSelecionadas.disabled = true;
+
+        let delay = 0;
+        fotosSelecionadas.forEach((url) => {
+          setTimeout(() => {
+            baixarFotoDireto(url, null);
+          }, delay);
+          delay += 600; // Intervalo de 600ms entre downloads para não travar o navegador
+        });
+
+        setTimeout(() => {
+          btnBaixarSelecionadas.disabled = false;
+          atualizarContadorSelecao();
+        }, delay + 1000);
+      });
+
+      btnCarregarMais.addEventListener('click', renderizarProximoLote);
 
       function iniciarGaleria(photos) {
         todasAsFotos = photos;
         fotosExibidasCount = 0;
+        fotosSelecionadas.clear();
+        atualizarContadorSelecao();
         galeriaResultados.innerHTML = '';
         renderizarProximoLote();
       }
 
-      // Restaura do sessionStorage se já houver busca realizada
       window.addEventListener('DOMContentLoaded', () => {
         const fotosSalvas = sessionStorage.getItem('minhas_fotos_colonia');
         if (fotosSalvas) {
@@ -271,13 +391,13 @@
         }
       });
 
-      inputSelfie.addEventListener('change', (e) => {
-        const file = e.target.files[0];
+      function processarEnvioFoto(file) {
         if (!file) return;
 
         statusBusca.innerText = 'Processando sua foto... Aguarde.';
         galeriaResultados.innerHTML = '';
         btnCarregarMais.style.display = 'none';
+        barraAcoes.style.display = 'none';
 
         const img = new Image();
         img.src = URL.createObjectURL(file);
@@ -325,7 +445,10 @@
             statusBusca.innerText = 'Erro ao conectar com o servidor.';
           });
         };
-      });
+      }
+
+      inputCamera.addEventListener('change', (e) => processarEnvioFoto(e.target.files[0]));
+      inputGaleria.addEventListener('change', (e) => processarEnvioFoto(e.target.files[0]));
     </script>
   </body>
 </html>
