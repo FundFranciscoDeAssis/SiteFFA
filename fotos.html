@@ -1,209 +1,44 @@
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="website icon" href="img/logodouradafund.png" />
-    <title>Galeria de Fotos - Fundação FA</title>
-    <style>
-      .galeria-section {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 140px 20px 80px 20px;
-        min-height: 75vh;
-        box-sizing: border-box;
-      }
-      .galeria-card-busca {
-        background-color: #0d3b66;
-        border-radius: 12px;
-        padding: 40px 20px;
-        text-align: center;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        margin-bottom: 40px;
-      }
-      .galeria-titulo {
-        color: #ffffff;
-        font-size: 2.2rem;
-        margin-bottom: 12px;
-        font-weight: 700;
-      }
-      .galeria-subtitulo {
-        color: #e0e0e0;
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.5;
-      }
-      .btn-selfie {
-        background-color: #f4d35e;
-        color: #0d3b66 !important;
-        padding: 14px 32px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        border-radius: 8px;
-        cursor: pointer;
-        display: inline-block;
-        transition: all 0.2s ease;
-        border: none;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-      .btn-selfie:hover {
-        background-color: #ee9b00;
-        transform: translateY(-2px);
-      }
-      .status-texto {
-        color: #ffffff;
-        font-size: 1.2rem;
-        margin-top: 20px;
-        font-weight: 600;
-      }
-      .galeria-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 24px;
-      }
-      .card-foto-item {
-        background: #ffffff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        padding: 12px;
-        transition: transform 0.2s;
-      }
-      .card-foto-item:hover {
-        transform: translateY(-4px);
-      }
-      .card-foto-item img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 6px;
-        background-color: #e2e8f0;
-      }
-      .btn-download-direto {
-        margin-top: 12px;
-        width: 100%;
-        padding: 10px 0;
-        background-color: #0d3b66;
-        color: #ffffff !important;
-        border: none;
-        border-radius: 6px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition: background-color 0.2s;
-      }
-      .btn-download-direto:hover {
-        background-color: #092846;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="overlay"></div>
-
-    <!-- Header -->
-    <header class="cabecalho">
-      <div class="cabecalho-logo">
-        <a href="index.html">
-          <img src="img/LogoFundBranca.svg" alt="Logo da Fundação Francisco de Assis" />
-        </a>
-      </div>
-      <div class="cabecalho-nav">
-        <a href="fotos.html" class="cabecalho-nav-item">Fotos do Evento</a>
-        <a href="sobre.html" class="cabecalho-nav-item">Sobre nós</a>
-        <section class="cabecalho-nav-projetos-drop">
-          <a class="cabecalho-nav-item">Projetos</a>
-          <div class="projetos-drop">
-            <ul class="projetos-drop-lista">
-              <li><a href="projetos_html/inclusao.html">Inclusão Digital</a></li>
-              <li><a href="projetos_html/socio_cultural.html">Socio-Cultural/Ambiental</a></li>
-              <li><a href="projetos_html/socio_recreativo.html">Socio-Recreativos</a></li>
-              <li><a href="projetos_html/socio_educacional.html">Socio-Educacional</a></li>
-              <li><a href="projetos_html/geracao.html">Geração Cidadã</a></li>
-              <li><a href="projetos_html/cessao_de_espaco.html">Cessão de Espaço</a></li>
-            </ul>
-          </div>
-        </section>
-        <a href="colaboradores.html" class="cabecalho-nav-item">Colaboradores</a>
-        <section class="cabecalho-nav-contatos-drop">
-          <a class="cabecalho-nav-item">Contatos</a>
-          <div class="contatos-drop">
-            <ul class="contatos-drop-lista">
-              <li><a href="https://www.instagram.com/fundfranciscodeassis/" target="_blank"><img src="img/instagram.svg" alt="Instagram" />Instagram</a></li>
-              <li><a href="https://wa.me/3138381235" target="_blank"><img src="img/wpp.svg" alt="Whatsapp" />Whatsapp</a></li>
-            </ul>
-          </div>
-        </section>
-      </div>
-      <button class="btnMenu">
-        <img class="nav-mobile-menu" src="img/menu.svg" alt="menu hamburguer" />
-      </button>
-    </header>
-
-    <!-- Área Principal da Galeria -->
-    <main class="galeria-section">
-      <div class="galeria-card-busca">
-        <h1 class="galeria-titulo">Encontre suas Fotos</h1>
-        <p class="galeria-subtitulo">
-          Tire uma selfie ou envie uma foto do seu rosto para localizar automaticamente suas imagens na Colônia de Férias.
+<main class="fotos-secao">
+      <div class="fotos-card-busca">
+        <h2>Busca por Reconhecimento Facial</h2>
+        <p>
+          Tire uma selfie ou envie uma foto do seu rosto para encontrar suas fotos na Colônia de Férias.
         </p>
 
-        <label for="input-selfie" class="btn-selfie">
+        <label for="input-selfie" class="sobre-botao-saibamais" style="cursor: pointer; display: inline-block;">
           Tirar Selfie / Enviar Foto
         </label>
         <input type="file" id="input-selfie" accept="image/*" capture="user" style="display: none;" />
 
-        <div id="status-busca" class="status-texto"></div>
+        <div id="status-busca" style="color: #ffffff; font-size: 1.1rem; margin-top: 20px; font-weight: 600;"></div>
       </div>
 
-      <div id="galeria-resultados" class="galeria-grid"></div>
+      <div id="galeria-resultados" class="fotos-grid"></div>
     </main>
 
-    <!-- Rodapé -->
-    <footer class="rodape">
-      <div class="rodape-div">
-        <img src="img/LogoFundCompleta.svg" alt="Logo Fundação Francisco de Assis" class="rodape-logo" />
-        <div class="rodape-linha"></div>
-        <div class="rodape-direitos">
-          <p class="rodape-direitos-itens">
-            © 2026 Fundação Francisco de Assis | Todos os direitos reservados
-          </p>
-        </div>
-      </div>
-    </footer>
-
-    <script src="JavaScript/menu.js"></script>
+    <!-- Script de Busca e Download via Proxy -->
     <script>
       const inputSelfie = document.getElementById('input-selfie');
       const statusBusca = document.getElementById('status-busca');
       const galeriaResultados = document.getElementById('galeria-resultados');
 
-      // Função para realizar o download direto no dispositivo usando a Tag Canvas
       function baixarFotoDireto(url, btnElement) {
-  btnElement.innerText = 'Baixando...';
-  btnElement.disabled = true;
+        btnElement.innerText = 'Baixando...';
+        btnElement.disabled = true;
 
-  // Chama o proxy da Vercel enviando a URL da imagem
-  const downloadProxyUrl = `/api/search-face?fileUrl=${encodeURIComponent(url)}`;
+        const downloadProxyUrl = `/api/search-face?fileUrl=${encodeURIComponent(url)}`;
+        const a = document.createElement('a');
+        a.href = downloadProxyUrl;
+        a.download = `Foto_Colonia_${Date.now()}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
 
-  // Criamos o link invisível apontando para o proxy
-  const a = document.createElement('a');
-  a.href = downloadProxyUrl;
-  a.download = `Foto_Colonia_${Date.now()}.jpg`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  setTimeout(() => {
-    btnElement.innerText = 'Baixar Foto Original';
-    btnElement.disabled = false;
-  }, 1500);
-}
+        setTimeout(() => {
+          btnElement.innerText = 'Baixar Foto Original';
+          btnElement.disabled = false;
+        }, 1500);
+      }
 
       function renderizarFotos(photos) {
         galeriaResultados.innerHTML = '';
@@ -211,7 +46,7 @@
 
         photos.forEach((url) => {
           const card = document.createElement('div');
-          card.className = 'card-foto-item';
+          card.className = 'fotos-item-card';
 
           const imgEl = document.createElement('img');
           imgEl.src = url;
@@ -219,7 +54,7 @@
           imgEl.loading = 'lazy';
 
           const btnDownload = document.createElement('button');
-          btnDownload.className = 'btn-download-direto';
+          btnDownload.className = 'btn-baixar-foto';
           btnDownload.innerText = 'Baixar Foto Original';
 
           btnDownload.addEventListener('click', () => {
@@ -232,7 +67,6 @@
         });
       }
 
-      // Mantém a sessão salva para evitar chamadas duplicadas na AWS
       window.addEventListener('DOMContentLoaded', () => {
         const fotosSalvas = sessionStorage.getItem('minhas_fotos_colonia');
         if (fotosSalvas) {
@@ -251,7 +85,7 @@
         const file = e.target.files[0];
         if (!file) return;
 
-        statusBusca.innerText = 'Processando sua foto... Aguarde um momento.';
+        statusBusca.innerText = 'Processando sua foto... Aguarde.';
         galeriaResultados.innerHTML = '';
 
         const img = new Image();
@@ -292,15 +126,13 @@
             } else if (data.error) {
               statusBusca.innerText = `Erro: ${data.error}`;
             } else {
-              statusBusca.innerText = 'Nenhuma foto encontrada para este rosto. Tente tirar outra selfie com melhor iluminação.';
+              statusBusca.innerText = 'Nenhuma foto encontrada para este rosto.';
             }
           })
           .catch(err => {
             console.error(err);
-            statusBusca.innerText = 'Ocorreu um erro ao conectar com o servidor. Tente novamente.';
+            statusBusca.innerText = 'Erro ao conectar com o servidor.';
           });
         };
       });
     </script>
-  </body>
-</html>
