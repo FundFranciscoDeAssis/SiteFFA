@@ -7,100 +7,104 @@
     <link rel="website icon" href="img/logodouradafund.png" />
     <title>Galeria de Fotos - Fundação FA</title>
     <style>
-      .galeria-section {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 140px 20px 80px 20px;
-        min-height: 75vh;
-        box-sizing: border-box;
-      }
-      .galeria-card-busca {
-        background-color: #0d3b66;
-        border-radius: 12px;
-        padding: 40px 20px;
-        text-align: center;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        margin-bottom: 40px;
-      }
-      .galeria-titulo {
-        color: #ffffff;
-        font-size: 2.2rem;
-        margin-bottom: 12px;
-        font-weight: 700;
-      }
-      .galeria-subtitulo {
-        color: #e0e0e0;
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.5;
-      }
-      .btn-selfie {
-        background-color: #f4d35e;
-        color: #0d3b66 !important;
-        padding: 14px 32px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        border-radius: 8px;
-        cursor: pointer;
-        display: inline-block;
-        transition: all 0.2s ease;
-        border: none;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-      .btn-selfie:hover {
-        background-color: #ee9b00;
-        transform: translateY(-2px);
-      }
-      .status-texto {
-        color: #ffffff;
-        font-size: 1.2rem;
-        margin-top: 20px;
-        font-weight: 600;
-      }
-      .galeria-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 24px;
-      }
-      .card-foto-item {
-        background: #ffffff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        padding: 12px;
-        transition: transform 0.2s;
-      }
-      .card-foto-item:hover {
-        transform: translateY(-4px);
-      }
-      .card-foto-item img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 6px;
-        background-color: #e2e8f0;
-      }
-      .btn-download-direto {
-        margin-top: 12px;
-        width: 100%;
-        padding: 10px 0;
-        background-color: #0d3b66;
-        color: #ffffff !important;
-        border: none;
-        border-radius: 6px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition: background-color 0.2s;
-      }
-      .btn-download-direto:hover {
-        background-color: #092846;
-      }
+/* --- GALERIA DE FOTOS POR RECONHECIMENTO FACIAL --- */
+.fotos-secao {
+  min-height: 70vh;
+  padding-top: 140px;
+  padding-bottom: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: var(--fonte-principal);
+}
+
+.fotos-card-busca {
+  background-color: var(--cor-principal);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  margin: 0 20px 40px 20px;
+}
+
+.fotos-card-busca h2 {
+  color: var(--cor-fundo);
+  font-family: var(--fonte-principal);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.fotos-card-busca p {
+  color: var(--cor-rodape);
+  font-family: var(--fonte-principal);
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+/* Botão de Selfie estilizado com a cor secundária (destaque) */
+.btn-selfie-custom {
+  background-color: var(--cor-secundaria);
+  color: #ffffff !important;
+  font-family: var(--fonte-principal);
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-selfie-custom:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.fotos-item-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  align-items: center;
+}
+
+.fotos-item-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+  background-color: #e2e8f0;
+}
+
+.btn-baixar-foto {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px 0;
+  background-color: var(--cor-header);
+  color: #ffffff !important;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--fonte-principal);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-baixar-foto:hover {
+  background-color: var(--cor-principal);
+}
     </style>
   </head>
   <body>
@@ -154,8 +158,8 @@
           Tire uma selfie ou envie uma foto do seu rosto para encontrar suas fotos na Colônia de Férias.
         </p>
 
-        <label for="input-selfie" class="sobre-botao-saibamais" style="cursor: pointer; display: inline-block;">
-          Tirar Selfie / Enviar Foto
+       <label for="input-selfie" class="btn-selfie-custom">
+         Tirar Selfie / Enviar Foto
         </label>
         <input type="file" id="input-selfie" accept="image/*" capture="user" style="display: none;" />
 
