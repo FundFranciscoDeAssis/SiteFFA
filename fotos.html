@@ -1,317 +1,91 @@
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="website icon" href="img/logodouradafund.png" />
-    <title>Galeria de Fotos - Fundação FA</title>
-  </head>
-  <body>
-    <div class="overlay"></div>
+<script>
+  const inputSelfie = document.getElementById('input-selfie');
+  const statusBusca = document.getElementById('status-busca');
+  const galeriaResultados = document.getElementById('galeria-resultados');
 
-    <!--Header-->
-    <header class="cabecalho">
-      <!--Logo-->
-      <div class="cabecalho-logo">
-        <a href="index.html">
-          <img
-            src="img/LogoFundBranca.svg"
-            alt="Logo da Fundação Francisco de Assis"
-          />
-        </a>
-      </div>
-      <!--Navegação-->
-      <div class="cabecalho-nav">
-        <a href="fotos.html" class="cabecalho-nav-item">Fotos do Evento</a>
-        <a href="sobre.html" class="cabecalho-nav-item">Sobre nós</a>
-        <!--Projetos-->
-        <section class="cabecalho-nav-projetos-drop">
-          <a class="cabecalho-nav-item">Projetos</a>
-          <div class="projetos-drop">
-            <ul class="projetos-drop-lista">
-              <li>
-                <a href="projetos_html/inclusao.html">Inclusão Digital</a>
-              </li>
-              <li>
-                <a href="projetos_html/socio_cultural.html"
-                  >Socio-Cultural/Ambiental</a
-                >
-              </li>
-              <li>
-                <a href="projetos_html/socio_recreativo.html"
-                  >Socio-Recreativos</a
-                >
-              </li>
-              <li>
-                <a href="projetos_html/socio_educacional.html"
-                  >Socio-Educacional</a
-                >
-              </li>
-              <li><a href="projetos_html/geracao.html">Geração Cidadã</a></li>
-              <li>
-                <a href="projetos_html/cessao_de_espaco.html"
-                  >Cessão de Espaço</a
-                >
-              </li>
-            </ul>
-          </div>
-        </section>
-        <!--Colaboradores-->
-        <a href="colaboradores.html" class="cabecalho-nav-item"
-          >Colaboradores</a
-        >
-        <!--Contatos-->
-        <section class="cabecalho-nav-contatos-drop">
-          <a class="cabecalho-nav-item">Contatos</a>
-          <div class="contatos-drop">
-            <ul class="contatos-drop-lista">
-              <li>
-                <a
-                  href="https://www.instagram.com/fundfranciscodeassis/"
-                  target="_blank"
-                  ><img
-                    src="img/instagram.svg"
-                    alt="logo do Instagram"
-                  />Instagram</a
-                >
-              </li>
-              <li>
-                <a href="https://wa.me/3138381235" target="_blank"
-                  ><img src="img/wpp.svg" alt="logo do Whatsapp" />Whatsapp</a
-                >
-              </li>
-            </ul>
-          </div>
-        </section>
-      </div>
-      <button class="btnMenu">
-        <img class="nav-mobile-menu" src="img/menu.svg" alt="menu hamburguer" />
-      </button>
-      <div class="cabecalho-nav-mobile">
-        <section class="cabecalho-nav-mobile-lista">
-          <button class="btnFechar">
-            <img
-              src="img/exit.svg"
-              alt="botão de fechar"
-              class="cabecalho-nav-mobile-exit"
-            />
-          </button>
-          <a href="fotos.html" class="cabecalho-nav-mobile-item">Fotos do Evento</a>
-          <hr class="cabecalho-nav-mobile-linha" />
-          <a href="sobre.html" class="cabecalho-nav-mobile-item">Sobre nós</a>
-          <hr class="cabecalho-nav-mobile-linha" />
-          <a class="cabecalho-nav-mobile-item">Projetos</a>
-          <ul>
-            <li><a href="projetos_html/inclusao.html">Inclusão Digital</a></li>
-            <li>
-              <a href="projetos_html/socio_cultural.html"
-                >Socio-Cultural/Ambiental</a
-              >
-            </li>
-            <li>
-              <a href="projetos_html/socio_recreativo.html"
-                >Socio-Recreativos</a
-              >
-            </li>
-            <li>
-              <a href="projetos_html/socio_educacional.html"
-                >Socio-Educacional</a
-              >
-            </li>
-            <li><a href="projetos_html/geracao.html">Geração Cidadã</a></li>
-            <li>
-              <a href="projetos_html/cessao_de_espaco.html">Cessão de Espaço</a>
-            </li>
-          </ul>
-          <hr class="cabecalho-nav-mobile-linha" />
-          <a class="cabecalho-nav-mobile-item" href="colaboradores.html"
-            >Colaboradores</a
-          >
-          <hr class="cabecalho-nav-mobile-linha" />
-          <a class="cabecalho-nav-mobile-item">Contatos</a>
-          <ul class="cabecalho-nav-mobile-lista-cont">
-            <li>
-              <a
-                href="https://www.instagram.com/fundfranciscodeassis/"
-                target="_blank"
-                class="cabecalho-nav-mobile-link"
-                ><img
-                  class="img-contato"
-                  src="img/instagram.svg"
-                  alt="logo do Instagram"
-                />Instagram</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://wa.me/3138381235"
-                target="_blank"
-                class="cabecalho-nav-mobile-link"
-                ><img
-                  class="img-contato"
-                  src="img/wpp.svg"
-                  alt="logo do Whatsapp"
-                />Whatsapp</a
-              >
-            </li>
-          </ul>
-          <hr class="cabecalho-nav-mobile-linha" />
-        </section>
-      </div>
-    </header>
+  inputSelfie.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-    <!-- Seção Principal de Busca por Reconhecimento Facial -->
-    <section class="sobre" style="min-height: 60vh; padding-top: 120px;">
-      <h2 class="sobre-titulo">Busca de Fotos por Reconhecimento Facial</h2>
-      <p class="sobre-texto" style="text-align: center;">
-        Envie uma foto do seu rosto ou tire uma selfie para visualizar apenas as imagens em que você aparece na Colônia de Férias.
-      </p>
+    statusBusca.innerText = 'Processando foto... Aguarde.';
+    galeriaResultados.innerHTML = '';
 
-      <div style="text-align: center; margin: 40px 0;">
-        <label for="input-selfie" class="sobre-botao-saibamais" style="cursor: pointer; display: inline-block;">
-          Tirar Selfie ou Enviar Foto
-        </label>
-        <input
-          type="file"
-          id="input-selfie"
-          accept="image/*"
-          capture="user"
-          style="display: none;"
-        />
-      </div>
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
 
-      <div id="status-busca" style="text-align: center; color: #ffffff; font-size: 1.1rem; margin-bottom: 20px;"></div>
+    img.onload = () => {
+      // Redimensiona a foto para no máximo 1024px para envio leve e rápido
+      const canvas = document.createElement('canvas');
+      const maxDim = 1024;
+      let width = img.width;
+      let height = img.height;
 
-      <div id="galeria-resultados" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px 0;"></div>
-    </section>
+      if (width > height && width > maxDim) {
+        height *= maxDim / width;
+        width = maxDim;
+      } else if (height > maxDim) {
+        width *= maxDim / height;
+        height = maxDim;
+      }
 
-    <!-- Rodapé-->
-    <footer class="rodape">
-      <div class="rodape-div">
-        <img src="img/LogoFundCompleta.svg" alt="Logo Fundação Francisco de Assis" class="rodape-logo" />
-        <div class="rodape-linha"></div>
-        <div class="rodape-listacompleta">
-          <ul class="rodape-lista">
-            Quem Somos
-            <li class="rodape-lista-nomes">
-              <a href="sobre.html" class="rodape-lista-itens">Sobre nós</a>
-            </li>
-          </ul>
-          <ul class="rodape-lista">
-            Acompanhe nossas Redes
-            <li class="rodape-lista-nomes">
-              <a
-                href="https://www.instagram.com/fundfranciscodeassis/"
-                class="rodape-lista-itens"
-                >Instagram</a
-              >
-            </li>
-            <li class="rodape-lista-nomes">
-              <a
-                href="https://www.facebook.com/fundfranciscodeassis"
-                class="rodape-lista-itens"
-                >Facebook</a
-              >
-            </li>
-            <li class="rodape-lista-nomes">
-              <a
-                href="https://www.tiktok.com/@fundacaomaker"
-                class="rodape-lista-itens"
-                >Tiktok</a
-              >
-            </li>
-          </ul>
-          <ul class="rodape-lista">
-            Contato
-            <li class="rodape-lista-nomes">
-              <a href="https://wa.me/3138381235" class="rodape-lista-itens"
-                >Whatsapp</a
-              >
-            </li>
-            <li class="rodape-lista-nomes">
-              <a
-                href="mailto:fundfranciscodeassis@gmail.com"
-                class="rodape-lista-itens"
-                >Email</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="rodape-direitos">
-        <p class="rodape-direitos-itens">
-          © 2024 Fundação Francisco de Assis | Todos os direitos reservados<br>
-          Desenvolvido por Erick Guerra e João Lage
-        </p>
-      </div>
-    </footer>
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
 
-    <script src="JavaScript/menu.js"></script>
-    <script>
-      const inputSelfie = document.getElementById('input-selfie');
-      const statusBusca = document.getElementById('status-busca');
-      const galeriaResultados = document.getElementById('galeria-resultados');
+      const base64Image = canvas.toDataURL('image/jpeg', 0.8);
+      statusBusca.innerText = 'Buscando fotos no servidor...';
 
-      inputSelfie.addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+      fetch('/api/search-face', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageBase64: base64Image }),
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.photos && data.photos.length > 0) {
+          statusBusca.innerText = `Foram encontradas ${data.photos.length} fotos com o seu rosto.`;
+          
+          data.photos.forEach((url) => {
+            const card = document.createElement('div');
+            card.style.background = 'rgba(255, 255, 255, 0.05)';
+            card.style.borderRadius = '8px';
+            card.style.overflow = 'hidden';
+            card.style.textAlign = 'center';
+            card.style.padding = '10px';
 
-        statusBusca.innerText = 'Processando e buscando fotos... Por favor, aguarde.';
-        galeriaResultados.innerHTML = '';
+            const imgEl = document.createElement('img');
+            imgEl.src = url;
+            imgEl.alt = 'Foto encontrada';
+            imgEl.style.width = '100%';
+            imgEl.style.height = '200px';
+            imgEl.style.objectFit = 'cover';
+            imgEl.style.borderRadius = '4px';
 
-        const formData = new FormData();
-        formData.append('file', file);
+            const linkDownload = document.createElement('a');
+            linkDownload.href = url;
+            linkDownload.target = '_blank';
+            linkDownload.download = '';
+            linkDownload.innerText = 'Baixar Foto';
+            linkDownload.className = 'sobre-botao-saibamais';
+            linkDownload.style.display = 'inline-block';
+            linkDownload.style.marginTop = '10px';
+            linkDownload.style.fontSize = '0.9rem';
 
-        try {
-          const response = await fetch('/api/search-face', {
-            method: 'POST',
-            body: formData,
+            card.appendChild(imgEl);
+            card.appendChild(linkDownload);
+            galeriaResultados.appendChild(card);
           });
-
-          const data = await response.json();
-
-          if (data.photos && data.photos.length > 0) {
-            statusBusca.innerText = `Foram encontradas ${data.photos.length} fotos com o seu rosto.`;
-            
-            data.photos.forEach((url) => {
-              const card = document.createElement('div');
-              card.style.background = 'rgba(255, 255, 255, 0.05)';
-              card.style.borderRadius = '8px';
-              card.style.overflow = 'hidden';
-              card.style.textAlign = 'center';
-              card.style.padding = '10px';
-
-              const img = document.createElement('img');
-              img.src = url;
-              img.alt = 'Foto encontrada';
-              img.style.width = '100%';
-              img.style.height = '200px';
-              img.style.objectFit = 'cover';
-              img.style.borderRadius = '4px';
-
-              const linkDownload = document.createElement('a');
-              linkDownload.href = url;
-              linkDownload.target = '_blank';
-              linkDownload.download = '';
-              linkDownload.innerText = 'Baixar Foto';
-              linkDownload.className = 'sobre-botao-saibamais';
-              linkDownload.style.display = 'inline-block';
-              linkDownload.style.marginTop = '10px';
-              linkDownload.style.fontSize = '0.9rem';
-
-              card.appendChild(img);
-              card.appendChild(linkDownload);
-              galeriaResultados.appendChild(card);
-            });
-          } else {
-            statusBusca.innerText = 'Nenhuma foto encontrada para este rosto. Tente tirar outra foto com melhor iluminação.';
-          }
-        } catch (error) {
-          console.error(error);
-          statusBusca.innerText = 'Ocorreu um erro ao buscar as fotos. Tente novamente.';
+        } else if (data.error) {
+          statusBusca.innerText = `Erro: ${data.error}`;
+        } else {
+          statusBusca.innerText = 'Nenhuma foto encontrada para este rosto. Tente tirar outra foto com melhor iluminacao.';
         }
+      })
+      .catch(err => {
+        console.error(err);
+        statusBusca.innerText = 'Ocorreu um erro ao conectar com o servidor. Tente novamente.';
       });
-    </script>
-  </body>
-</html>
+    };
+  });
+</script>
