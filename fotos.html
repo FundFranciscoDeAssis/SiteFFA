@@ -1,4 +1,153 @@
-<main class="fotos-secao">
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="website icon" href="img/logodouradafund.png" />
+    <title>Galeria de Fotos - Fundação FA</title>
+    <style>
+      .galeria-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 140px 20px 80px 20px;
+        min-height: 75vh;
+        box-sizing: border-box;
+      }
+      .galeria-card-busca {
+        background-color: #0d3b66;
+        border-radius: 12px;
+        padding: 40px 20px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        margin-bottom: 40px;
+      }
+      .galeria-titulo {
+        color: #ffffff;
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+        font-weight: 700;
+      }
+      .galeria-subtitulo {
+        color: #e0e0e0;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+      }
+      .btn-selfie {
+        background-color: #f4d35e;
+        color: #0d3b66 !important;
+        padding: 14px 32px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        display: inline-block;
+        transition: all 0.2s ease;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .btn-selfie:hover {
+        background-color: #ee9b00;
+        transform: translateY(-2px);
+      }
+      .status-texto {
+        color: #ffffff;
+        font-size: 1.2rem;
+        margin-top: 20px;
+        font-weight: 600;
+      }
+      .galeria-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .card-foto-item {
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        transition: transform 0.2s;
+      }
+      .card-foto-item:hover {
+        transform: translateY(-4px);
+      }
+      .card-foto-item img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 6px;
+        background-color: #e2e8f0;
+      }
+      .btn-download-direto {
+        margin-top: 12px;
+        width: 100%;
+        padding: 10px 0;
+        background-color: #0d3b66;
+        color: #ffffff !important;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .btn-download-direto:hover {
+        background-color: #092846;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header class="cabecalho">
+      <div class="cabecalho-logo">
+        <a href="index.html">
+          <img src="img/LogoFundBranca.svg" alt="Logo da Fundação Francisco de Assis" />
+        </a>
+      </div>
+      <div class="cabecalho-nav">
+        <a href="fotos.html" class="cabecalho-nav-item">Fotos do Evento</a>
+        <a href="sobre.html" class="cabecalho-nav-item">Sobre nós</a>
+        <section class="cabecalho-nav-projetos-drop">
+          <a class="cabecalho-nav-item">Projetos</a>
+          <div class="projetos-drop">
+            <ul class="projetos-drop-lista">
+              <li><a href="projetos_html/inclusao.html">Inclusão Digital</a></li>
+              <li><a href="projetos_html/socio_cultural.html">Socio-Cultural/Ambiental</a></li>
+              <li><a href="projetos_html/socio_recreativo.html">Socio-Recreativos</a></li>
+              <li><a href="projetos_html/socio_educacional.html">Socio-Educacional</a></li>
+              <li><a href="projetos_html/geracao.html">Geração Cidadã</a></li>
+              <li><a href="projetos_html/cessao_de_espaco.html">Cessão de Espaço</a></li>
+            </ul>
+          </div>
+        </section>
+        <a href="colaboradores.html" class="cabecalho-nav-item">Colaboradores</a>
+        <section class="cabecalho-nav-contatos-drop">
+          <a class="cabecalho-nav-item">Contatos</a>
+          <div class="contatos-drop">
+            <ul class="contatos-drop-lista">
+              <li><a href="https://www.instagram.com/fundfranciscodeassis/" target="_blank"><img src="img/instagram.svg" alt="Instagram" />Instagram</a></li>
+              <li><a href="https://wa.me/3138381235" target="_blank"><img src="img/wpp.svg" alt="Whatsapp" />Whatsapp</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <button class="btnMenu">
+        <img class="nav-mobile-menu" src="img/menu.svg" alt="menu hamburguer" />
+      </button>
+    </header>
+
+    <!-- Área Principal da Galeria -->
+    <!-- Área da Galeria usando os estilos do site -->
+    <main class="fotos-secao">
       <div class="fotos-card-busca">
         <h2>Busca por Reconhecimento Facial</h2>
         <p>
@@ -136,3 +285,5 @@
         };
       });
     </script>
+  </body>
+</html>
