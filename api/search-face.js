@@ -11,41 +11,58 @@ const credentials = {
 const rekognition = new RekognitionClient({ region, credentials });
 const s3 = new S3Client({ region, credentials });
 
-// Função para encontrar a pasta exata onde a foto está no S3
 async function findRealS3Key(bucket, fileName) {
-  // Se o ID já veio com pasta
   if (fileName.includes("/")) return fileName;
 
-  // Se veio algo como Dia1_IMG_5209.JPG
   let cleanName = fileName;
   if (cleanName.match(/^Dia\d+_/)) {
     cleanName = cleanName.replace(/^(Dia\d+)_/, "$1/");
     return cleanName;
   }
 
-  // Lista de pastas possíveis no S3
   const possiblePaths = [
     `Dia1/${fileName}`,
     `Dia2/${fileName}`,
     `Dia3/${fileName}`,
     `Dia4/${fileName}`,
-    fileName // Caso esteja na raiz
+    fileName
   ];
 
   for (const path of possiblePaths) {
     try {
-      // Testa se o arquivo existe nesse caminho exato no S3
       await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: path }));
-      return path; // Retorna o primeiro caminho válido encontrado
-    } catch (err) {
-      // Arquivo não está nessa pasta, tenta a próxima
-    }
+      return path;
+    } catch (err) {}
   }
 
   return fileName;
 }
 
 export default async function handler(req, res) {
+  // ROTA DE DOWNLOAD DIRETO VIA PROXY (Resolve o CORS e força o salvamento)
+  if (req.method === "GET") {
+    const { fileUrl } = req.query;
+    if (!fileUrl) {
+      return res.status(400).send("URL da foto nao fornecida.");
+    }
+
+    try {
+      const response = await fetch(fileUrl);
+      if (!response.ok) throw new Error("Erro ao buscar imagem no S3");
+
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      res.setHeader("Content-Type", "image/jpeg");
+      res.setHeader("Content-Disposition", `attachment; filename="Foto_Colonia_${Date.now()}.jpg"`);
+      return res.send(buffer);
+    } catch (error) {
+      console.error("Erro no proxy de download:", error);
+      return res.status(500).send("Erro ao baixar arquivo.");
+    }
+  }
+
+  // ROTA DE BUSCA POR RECONHECIMENTO FACIAL
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Metodo nao permitido" });
   }
@@ -74,7 +91,6 @@ export default async function handler(req, res) {
 
     const bucket = process.env.AWS_S3_BUCKET || "9-colonia-ferias-fotos";
 
-    // Mapeia e descobre a pasta exata de cada foto encontrada
     const photoUrls = await Promise.all(
       response.FaceMatches.map(async (match) => {
         const externalId = match.Face.ExternalImageId;
@@ -85,11 +101,8 @@ export default async function handler(req, res) {
             Bucket: bucket,
             Key: realKey,
           });
-          
-          // Gera a URL assinada válida por 1 hora com o caminho da pasta correto
           return await getSignedUrl(s3, commandGetObject, { expiresIn: 3600 });
         } catch (err) {
-          console.error(`Erro ao assinar a foto ${realKey}:`, err);
           return null;
         }
       })

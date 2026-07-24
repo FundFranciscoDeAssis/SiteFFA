@@ -185,57 +185,25 @@
 
       // Função para realizar o download direto no dispositivo usando a Tag Canvas
       function baixarFotoDireto(url, btnElement) {
-        btnElement.innerText = 'Baixando...';
-        btnElement.disabled = true;
+  btnElement.innerText = 'Baixando...';
+  btnElement.disabled = true;
 
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.src = url;
+  // Chama o proxy da Vercel enviando a URL da imagem
+  const downloadProxyUrl = `/api/search-face?fileUrl=${encodeURIComponent(url)}`;
 
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.naturalWidth || img.width;
-          canvas.height = img.naturalHeight || img.height;
+  // Criamos o link invisível apontando para o proxy
+  const a = document.createElement('a');
+  a.href = downloadProxyUrl;
+  a.download = `Foto_Colonia_${Date.now()}.jpg`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-
-          canvas.toBlob((blob) => {
-            if (!blob) {
-              window.open(url, '_blank');
-              btnElement.innerText = 'Baixar Foto Original';
-              btnElement.disabled = false;
-              return;
-            }
-
-            const blobUrl = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = blobUrl;
-            link.download = `Foto_Colonia_${Date.now()}.jpg`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(blobUrl);
-
-            btnElement.innerText = 'Baixar Foto Original';
-            btnElement.disabled = false;
-          }, 'image/jpeg', 1.0);
-        };
-
-        img.onerror = () => {
-          // Se der erro de CORS na renderização do Canvas, faz o fallback via download tradicional
-          const linkFallback = document.createElement('a');
-          linkFallback.href = url;
-          linkFallback.target = '_blank';
-          linkFallback.download = `Foto_Colonia_${Date.now()}.jpg`;
-          document.body.appendChild(linkFallback);
-          linkFallback.click();
-          document.body.removeChild(linkFallback);
-
-          btnElement.innerText = 'Baixar Foto Original';
-          btnElement.disabled = false;
-        };
-      }
+  setTimeout(() => {
+    btnElement.innerText = 'Baixar Foto Original';
+    btnElement.disabled = false;
+  }, 1500);
+}
 
       function renderizarFotos(photos) {
         galeriaResultados.innerHTML = '';
