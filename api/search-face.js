@@ -80,7 +80,7 @@ export default async function handler(req, res) {
       CollectionId: process.env.AWS_REKOGNITION_COLLECTION_ID || "colonia-ferias-9",
       Image: { Bytes: imageBuffer },
       FaceMatchThreshold: 65,
-      MaxFaces: 50,
+      MaxFaces: 150,
     });
 
     const response = await rekognition.send(command);

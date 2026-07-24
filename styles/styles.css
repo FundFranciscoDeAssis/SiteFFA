@@ -135,7 +135,8 @@
   height: 220px;
   object-fit: cover;
   border-radius: 6px;
-  background-color: #e2e8f0;
+  background-color: #e2e8f0; 
+  display: block;
 }
 
 .btn-baixar-foto {

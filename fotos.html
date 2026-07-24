@@ -150,7 +150,6 @@
     </header>
 
     <!-- Área Principal da Galeria -->
-    <!-- Área da Galeria usando os estilos do site -->
     <main class="fotos-secao">
       <div class="fotos-card-busca">
         <h2>Busca por Reconhecimento Facial</h2>
@@ -158,22 +157,36 @@
           Tire uma selfie ou envie uma foto do seu rosto para encontrar suas fotos na Colônia de Férias.
         </p>
 
-       <label for="input-selfie" class="btn-selfie-custom">
-         Tirar Selfie / Enviar Foto
+        <label for="input-selfie" class="btn-selfie-custom">
+          Tirar Selfie / Enviar Foto
         </label>
         <input type="file" id="input-selfie" accept="image/*" capture="user" style="display: none;" />
 
         <div id="status-busca" style="color: #ffffff; font-size: 1.1rem; margin-top: 20px; font-weight: 600;"></div>
       </div>
 
+      <!-- Grid de fotos -->
       <div id="galeria-resultados" class="fotos-grid"></div>
+
+      <!-- Botão de Paginação (Carregar Mais) -->
+      <div style="text-align: center; margin-top: 30px;">
+        <button id="btn-carregar-mais" class="btn-selfie-custom" style="display: none; background-color: var(--cor-principal);">
+          Carregar Mais Fotos
+        </button>
+      </div>
     </main>
 
-    <!-- Script de Busca e Download via Proxy -->
+    <!-- Script de Busca, Paginação e Download -->
     <script>
       const inputSelfie = document.getElementById('input-selfie');
       const statusBusca = document.getElementById('status-busca');
       const galeriaResultados = document.getElementById('galeria-resultados');
+      const btnCarregarMais = document.getElementById('btn-carregar-mais');
+
+      // Variáveis para controlar a paginação em memória
+      let todasAsFotos = [];
+      let fotosExibidasCount = 0;
+      const FOTOS_POR_PAGINA = 12;
 
       function baixarFotoDireto(url, btnElement) {
         btnElement.innerText = 'Baixando...';
@@ -193,11 +206,11 @@
         }, 1500);
       }
 
-      function renderizarFotos(photos) {
-        galeriaResultados.innerHTML = '';
-        statusBusca.innerText = `Encontramos ${photos.length} fotos com o seu rosto!`;
+      // Função que renderiza o próximo lote de fotos na tela
+      function renderizarProximoLote() {
+        const proximoLote = todasAsFotos.slice(fotosExibidasCount, fotosExibidasCount + FOTOS_POR_PAGINA);
 
-        photos.forEach((url) => {
+        proximoLote.forEach((url) => {
           const card = document.createElement('div');
           card.className = 'fotos-item-card';
 
@@ -218,15 +231,39 @@
           card.appendChild(btnDownload);
           galeriaResultados.appendChild(card);
         });
+
+        fotosExibidasCount += proximoLote.length;
+
+        // Se ainda houverem fotos a serem exibidas, mostra o botão "Carregar Mais"
+        if (fotosExibidasCount < todasAsFotos.length) {
+          btnCarregarMais.style.display = 'inline-block';
+        } else {
+          btnCarregarMais.style.display = 'none';
+        }
+
+        statusBusca.innerText = `Exibindo ${fotosExibidasCount} de ${todasAsFotos.length} fotos encontradas.`;
       }
 
+      // Evento de clique no botão "Carregar Mais"
+      btnCarregarMais.addEventListener('click', () => {
+        renderizarProximoLote();
+      });
+
+      function iniciarGaleria(photos) {
+        todasAsFotos = photos;
+        fotosExibidasCount = 0;
+        galeriaResultados.innerHTML = '';
+        renderizarProximoLote();
+      }
+
+      // Restaura do sessionStorage se já houver busca realizada
       window.addEventListener('DOMContentLoaded', () => {
         const fotosSalvas = sessionStorage.getItem('minhas_fotos_colonia');
         if (fotosSalvas) {
           try {
             const photos = JSON.parse(fotosSalvas);
             if (photos && photos.length > 0) {
-              renderizarFotos(photos);
+              iniciarGaleria(photos);
             }
           } catch (e) {
             sessionStorage.removeItem('minhas_fotos_colonia');
@@ -240,6 +277,7 @@
 
         statusBusca.innerText = 'Processando sua foto... Aguarde.';
         galeriaResultados.innerHTML = '';
+        btnCarregarMais.style.display = 'none';
 
         const img = new Image();
         img.src = URL.createObjectURL(file);
@@ -275,7 +313,7 @@
           .then(data => {
             if (data.photos && data.photos.length > 0) {
               sessionStorage.setItem('minhas_fotos_colonia', JSON.stringify(data.photos));
-              renderizarFotos(data.photos);
+              iniciarGaleria(data.photos);
             } else if (data.error) {
               statusBusca.innerText = `Erro: ${data.error}`;
             } else {
