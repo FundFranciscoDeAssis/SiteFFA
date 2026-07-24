@@ -29,6 +29,17 @@
     color: var(--cor-principal);
     transition: .3s;
 }
+.sobre-botao-fotos{
+    font-size: 20px;
+    padding: 0.7rem 5rem;
+    border-radius: 10px;
+    background-color: var(--cor-rodape);
+    text-decoration: none;
+    color: var(--cor-principal);
+    transition: .3s;
+    align-items: center;
+    justify-content: center;
+}
 .sobre-botao-saibamais:hover{
     background-color: rgb(216, 207, 207);
 }
