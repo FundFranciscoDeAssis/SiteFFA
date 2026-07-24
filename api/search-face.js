@@ -1,13 +1,15 @@
 import { RekognitionClient, SearchFacesByImageCommand } from "@aws-sdk/client-rekognition";
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const region = process.env.AWS_REGION || "us-east-1";
-const rekognition = new RekognitionClient({
-  region,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
-});
+const credentials = {
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+};
+
+const rekognition = new RekognitionClient({ region, credentials });
+const s3 = new S3Client({ region, credentials });
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -38,22 +40,34 @@ export default async function handler(req, res) {
 
     const bucket = process.env.AWS_S3_BUCKET || "9-colonia-ferias-fotos";
 
-    const photoUrls = response.FaceMatches.map((match) => {
-      let externalId = match.Face.ExternalImageId;
-      
-      // Se o ID original do Rekognition tiver alterado barras por underscores
-      let s3Key = externalId;
+    // Para cada foto reconhecida, tenta montar a chave com pasta e gera Presigned URL
+    const photoUrls = await Promise.all(
+      response.FaceMatches.map(async (match) => {
+        let externalId = match.Face.ExternalImageId;
+        
+        // Garante a troca de underline por barra se for o padrão de pasta
+        let s3Key = externalId;
+        if (s3Key.includes("_") && !s3Key.includes("/")) {
+          s3Key = s3Key.replace(/^(Dia\d+)_/, "$1/");
+        }
 
-      // Trata casos em que a pasta venha separada por underline ex: Dia1_IMG_5119.JPG -> Dia1/IMG_5119.JPG
-      if (s3Key.includes("_") && !s3Key.includes("/")) {
-        // Se começar com Dia1, Dia2, Dia3, Dia4
-        s3Key = s3Key.replace(/^(Dia\d+)_/, "$1/");
-      }
+        try {
+          const getObjectParams = {
+            Bucket: bucket,
+            Key: s3Key,
+          };
+          
+          // Gera uma URL temporária válida por 60 minutos
+          const commandGetObject = new GetObjectCommand(getObjectParams);
+          return await getSignedUrl(s3, commandGetObject, { expiresIn: 3600 });
+        } catch (err) {
+          console.error("Erro ao gerar URL assinada:", err);
+          return null;
+        }
+      })
+    );
 
-      return `https://${bucket}.s3.${region}.amazonaws.com/${s3Key}`;
-    });
-
-    const validUrls = [...new Set(photoUrls)];
+    const validUrls = [...new Set(photoUrls.filter(url => url !== null))];
 
     return res.status(200).json({ photos: validUrls });
   } catch (error) {
