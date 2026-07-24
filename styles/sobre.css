@@ -32,7 +32,7 @@
 .sobre-botao-fotos{
     display: flex;
     align-items: center;
-    
+    justify-content: center;
 
 }
 .sobre-botao-saibamais:hover{
