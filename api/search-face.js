@@ -36,15 +36,18 @@ export default async function handler(req, res) {
       return res.status(200).json({ photos: [] });
     }
 
-    const bucket = process.env.AWS_S3_BUCKET;
+    const bucket = process.env.AWS_S3_BUCKET || "9-colonia-ferias-fotos";
 
     const photoUrls = response.FaceMatches.map((match) => {
-      const externalId = match.Face.ExternalImageId;
+      let externalId = match.Face.ExternalImageId;
       
-      // Se a chave contiver underscore para indicar pasta, ajusta a URL
+      // Se o ID original do Rekognition tiver alterado barras por underscores
       let s3Key = externalId;
-      if (externalId.includes("_") && !externalId.includes("/")) {
-        s3Key = externalId.replace("_", "/");
+
+      // Trata casos em que a pasta venha separada por underline ex: Dia1_IMG_5119.JPG -> Dia1/IMG_5119.JPG
+      if (s3Key.includes("_") && !s3Key.includes("/")) {
+        // Se começar com Dia1, Dia2, Dia3, Dia4
+        s3Key = s3Key.replace(/^(Dia\d+)_/, "$1/");
       }
 
       return `https://${bucket}.s3.${region}.amazonaws.com/${s3Key}`;
