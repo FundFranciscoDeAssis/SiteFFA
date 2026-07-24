@@ -68,7 +68,18 @@
     font-weight: 600;
 }
 
+.btn-destaque-fotos {
+  background-color: #0070f3;
+  color: #ffffff !important;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
 
+.btn-destaque-fotos:hover {
+  background-color: #0051a8;
+}
 
 @keyframes flutuar {
     0%{ 
