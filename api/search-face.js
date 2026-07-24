@@ -1,5 +1,5 @@
 import { RekognitionClient, SearchFacesByImageCommand } from "@aws-sdk/client-rekognition";
-import { S3Client, HeadObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const region = process.env.AWS_REGION || "us-east-1";
@@ -11,35 +11,8 @@ const credentials = {
 const rekognition = new RekognitionClient({ region, credentials });
 const s3 = new S3Client({ region, credentials });
 
-async function findRealS3Key(bucket, fileName) {
-  if (fileName.includes("/")) return fileName;
-
-  let cleanName = fileName;
-  if (cleanName.match(/^Dia\d+_/)) {
-    cleanName = cleanName.replace(/^(Dia\d+)_/, "$1/");
-    return cleanName;
-  }
-
-  const possiblePaths = [
-    `Dia1/${fileName}`,
-    `Dia2/${fileName}`,
-    `Dia3/${fileName}`,
-    `Dia4/${fileName}`,
-    fileName
-  ];
-
-  for (const path of possiblePaths) {
-    try {
-      await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: path }));
-      return path;
-    } catch (err) {}
-  }
-
-  return fileName;
-}
-
 export default async function handler(req, res) {
-  // ROTA DE DOWNLOAD DIRETO VIA PROXY (Resolve o CORS e força o salvamento)
+  // ROTA DE DOWNLOAD DIRETO VIA PROXY (Resolve CORS e força o download)
   if (req.method === "GET") {
     const { fileUrl } = req.query;
     if (!fileUrl) {
@@ -91,23 +64,30 @@ export default async function handler(req, res) {
 
     const bucket = process.env.AWS_S3_BUCKET || "9-colonia-ferias-fotos";
 
+    // Como as fotos estão na raiz, o ExternalImageId é diretamente a Key do S3
     const photoUrls = await Promise.all(
       response.FaceMatches.map(async (match) => {
-        const externalId = match.Face.ExternalImageId;
-        const realKey = await findRealS3Key(bucket, externalId);
+        let key = match.Face.ExternalImageId;
+
+        // Trata eventuais trocas de underline por barra caso tenham sido indexadas assim
+        if (key.includes("Dia")) {
+          key = key.replace(/^Dia\d+[\/_]/, ""); 
+        }
 
         try {
           const commandGetObject = new GetObjectCommand({
             Bucket: bucket,
-            Key: realKey,
+            Key: key,
           });
           return await getSignedUrl(s3, commandGetObject, { expiresIn: 3600 });
         } catch (err) {
+          console.error(`Erro ao gerar presigned URL para ${key}:`, err);
           return null;
         }
       })
     );
 
+    // Remove duplicados e nulos
     const validUrls = [...new Set(photoUrls.filter(url => url !== null))];
 
     return res.status(200).json({ photos: validUrls });
