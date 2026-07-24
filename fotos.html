@@ -7,65 +7,98 @@
     <link rel="website icon" href="img/logodouradafund.png" />
     <title>Galeria de Fotos - Fundação FA</title>
     <style>
-      .galeria-wrapper {
+      .galeria-section {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 120px 20px 60px 20px;
-        min-height: 70vh;
+        padding: 140px 20px 80px 20px;
+        min-height: 75vh;
         box-sizing: border-box;
       }
-      .galeria-titulo {
+      .galeria-card-busca {
+        background-color: #0d3b66;
+        border-radius: 12px;
+        padding: 40px 20px;
         text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        margin-bottom: 40px;
+      }
+      .galeria-titulo {
         color: #ffffff;
-        font-size: 2rem;
-        margin-bottom: 10px;
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+        font-weight: 700;
       }
       .galeria-subtitulo {
-        text-align: center;
-        color: #cccccc;
-        font-size: 1rem;
+        color: #e0e0e0;
+        font-size: 1.1rem;
         margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+      }
+      .btn-selfie {
+        background-color: #f4d35e;
+        color: #0d3b66 !important;
+        padding: 14px 32px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        display: inline-block;
+        transition: all 0.2s ease;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .btn-selfie:hover {
+        background-color: #ee9b00;
+        transform: translateY(-2px);
+      }
+      .status-texto {
+        color: #ffffff;
+        font-size: 1.2rem;
+        margin-top: 20px;
+        font-weight: 600;
       }
       .galeria-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
       }
-      .card-foto {
+      .card-foto-item {
         background: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        border-radius: 10px;
         overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
-        align-items: center;
         padding: 12px;
         transition: transform 0.2s;
       }
-      .card-foto:hover {
+      .card-foto-item:hover {
         transform: translateY(-4px);
       }
-      .card-foto img {
+      .card-foto-item img {
         width: 100%;
-        height: 200px;
+        height: 220px;
         object-fit: cover;
         border-radius: 6px;
-        background-color: #f0f0f0;
+        background-color: #e2e8f0;
       }
-      .btn-download-foto {
-        margin-top: 10px;
+      .btn-download-direto {
+        margin-top: 12px;
         width: 100%;
-        text-align: center;
-        padding: 8px 0;
+        padding: 10px 0;
         background-color: #0d3b66;
         color: #ffffff !important;
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: bold;
-        font-size: 0.9rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
       }
-      .btn-download-foto:hover {
+      .btn-download-direto:hover {
         background-color: #092846;
       }
     </style>
@@ -73,6 +106,7 @@
   <body>
     <div class="overlay"></div>
 
+    <!-- Header -->
     <header class="cabecalho">
       <div class="cabecalho-logo">
         <a href="index.html">
@@ -111,21 +145,26 @@
       </button>
     </header>
 
-    <main class="galeria-wrapper">
-      <h1 class="galeria-titulo">Busca de Fotos por Selfie</h1>
-      <p class="galeria-subtitulo">Tire uma foto ou envie uma imagem do seu rosto para encontrar suas fotos no evento.</p>
+    <!-- Área Principal da Galeria -->
+    <main class="galeria-section">
+      <div class="galeria-card-busca">
+        <h1 class="galeria-titulo">Encontre suas Fotos</h1>
+        <p class="galeria-subtitulo">
+          Tire uma selfie ou envie uma foto do seu rosto para localizar automaticamente suas imagens na Colônia de Férias.
+        </p>
 
-      <div style="text-align: center; margin-bottom: 30px;">
-        <label for="input-selfie" class="btn-download-foto" style="display: inline-block; width: auto; padding: 12px 30px; cursor: pointer;">
-          Tirar Selfie ou Escolher Foto
+        <label for="input-selfie" class="btn-selfie">
+          Tirar Selfie / Enviar Foto
         </label>
         <input type="file" id="input-selfie" accept="image/*" capture="user" style="display: none;" />
+
+        <div id="status-busca" class="status-texto"></div>
       </div>
 
-      <div id="status-busca" style="text-align: center; color: #ffffff; font-size: 1.1rem; margin-bottom: 20px;"></div>
       <div id="galeria-resultados" class="galeria-grid"></div>
     </main>
 
+    <!-- Rodapé -->
     <footer class="rodape">
       <div class="rodape-div">
         <img src="img/LogoFundCompleta.svg" alt="Logo Fundação Francisco de Assis" class="rodape-logo" />
@@ -139,132 +178,161 @@
     </footer>
 
     <script src="JavaScript/menu.js"></script>
-<script>
-  const inputSelfie = document.getElementById('input-selfie');
-  const statusBusca = document.getElementById('status-busca');
-  const galeriaResultados = document.getElementById('galeria-resultados');
+    <script>
+      const inputSelfie = document.getElementById('input-selfie');
+      const statusBusca = document.getElementById('status-busca');
+      const galeriaResultados = document.getElementById('galeria-resultados');
 
-  // 1. Função para renderizar as fotos na tela
-  function renderizarFotos(photos) {
-    galeriaResultados.innerHTML = '';
-    statusBusca.innerText = `Foram encontradas ${photos.length} fotos com o seu rosto.`;
+      // Função para realizar o download direto no dispositivo usando a Tag Canvas
+      function baixarFotoDireto(url, btnElement) {
+        btnElement.innerText = 'Baixando...';
+        btnElement.disabled = true;
 
-    photos.forEach((url) => {
-      const card = document.createElement('div');
-      card.className = 'card-foto';
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = url;
 
-      const imgEl = document.createElement('img');
-      imgEl.src = url;
-      imgEl.alt = 'Foto encontrada';
-      imgEl.loading = 'lazy';
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth || img.width;
+          canvas.height = img.naturalHeight || img.height;
 
-      // Botão de download que baixa o arquivo diretamente sem recarregar a página
-      const btnDownload = document.createElement('button');
-      btnDownload.innerText = 'Baixar Foto Original 4K';
-      btnDownload.className = 'btn-download-foto';
-      btnDownload.style.border = 'none';
-      btnDownload.style.cursor = 'pointer';
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
 
-      btnDownload.addEventListener('click', async () => {
-        btnDownload.innerText = 'Baixando...';
-        try {
-          const res = await fetch(url);
-          const blob = await res.blob();
-          const blobUrl = URL.createObjectURL(blob);
-          
-          const a = document.createElement('a');
-          a.href = blobUrl;
-          a.download = `Foto_Colonia_${Date.now()}.jpg`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(blobUrl);
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              window.open(url, '_blank');
+              btnElement.innerText = 'Baixar Foto Original';
+              btnElement.disabled = false;
+              return;
+            }
 
-          btnDownload.innerText = 'Baixar Foto Original 4K';
-        } catch (err) {
-          // Caso ocorra bloqueio de CORS no fetch, abre em nova aba sem recarregar
-          window.open(url, '_blank');
-          btnDownload.innerText = 'Baixar Foto Original 4K';
+            const blobUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = `Foto_Colonia_${Date.now()}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(blobUrl);
+
+            btnElement.innerText = 'Baixar Foto Original';
+            btnElement.disabled = false;
+          }, 'image/jpeg', 1.0);
+        };
+
+        img.onerror = () => {
+          // Se der erro de CORS na renderização do Canvas, faz o fallback via download tradicional
+          const linkFallback = document.createElement('a');
+          linkFallback.href = url;
+          linkFallback.target = '_blank';
+          linkFallback.download = `Foto_Colonia_${Date.now()}.jpg`;
+          document.body.appendChild(linkFallback);
+          linkFallback.click();
+          document.body.removeChild(linkFallback);
+
+          btnElement.innerText = 'Baixar Foto Original';
+          btnElement.disabled = false;
+        };
+      }
+
+      function renderizarFotos(photos) {
+        galeriaResultados.innerHTML = '';
+        statusBusca.innerText = `Encontramos ${photos.length} fotos com o seu rosto!`;
+
+        photos.forEach((url) => {
+          const card = document.createElement('div');
+          card.className = 'card-foto-item';
+
+          const imgEl = document.createElement('img');
+          imgEl.src = url;
+          imgEl.alt = 'Foto encontrada';
+          imgEl.loading = 'lazy';
+
+          const btnDownload = document.createElement('button');
+          btnDownload.className = 'btn-download-direto';
+          btnDownload.innerText = 'Baixar Foto Original';
+
+          btnDownload.addEventListener('click', () => {
+            baixarFotoDireto(url, btnDownload);
+          });
+
+          card.appendChild(imgEl);
+          card.appendChild(btnDownload);
+          galeriaResultados.appendChild(card);
+        });
+      }
+
+      // Mantém a sessão salva para evitar chamadas duplicadas na AWS
+      window.addEventListener('DOMContentLoaded', () => {
+        const fotosSalvas = sessionStorage.getItem('minhas_fotos_colonia');
+        if (fotosSalvas) {
+          try {
+            const photos = JSON.parse(fotosSalvas);
+            if (photos && photos.length > 0) {
+              renderizarFotos(photos);
+            }
+          } catch (e) {
+            sessionStorage.removeItem('minhas_fotos_colonia');
+          }
         }
       });
 
-      card.appendChild(imgEl);
-      card.appendChild(btnDownload);
-      galeriaResultados.appendChild(card);
-    });
-  }
+      inputSelfie.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
 
-  // 2. Verificar se já existem fotos salvas na sessão ao carregar a página
-  window.addEventListener('DOMContentLoaded', () => {
-    const fotosSalvas = sessionStorage.getItem('minhas_fotos_colonia');
-    if (fotosSalvas) {
-      try {
-        const photos = JSON.parse(fotosSalvas);
-        if (photos && photos.length > 0) {
-          renderizarFotos(photos);
-        }
-      } catch (e) {
-        sessionStorage.removeItem('minhas_fotos_colonia');
-      }
-    }
-  });
+        statusBusca.innerText = 'Processando sua foto... Aguarde um momento.';
+        galeriaResultados.innerHTML = '';
 
-  // 3. Evento de envio de selfie
-  inputSelfie.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
 
-    statusBusca.innerText = 'Processando foto... Aguarde.';
-    galeriaResultados.innerHTML = '';
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const maxDim = 1024;
+          let width = img.width;
+          let height = img.height;
 
-    const img = new Image();
-    img.src = URL.createObjectURL(file);
+          if (width > height && width > maxDim) {
+            height *= maxDim / width;
+            width = maxDim;
+          } else if (height > maxDim) {
+            width *= maxDim / height;
+            height = maxDim;
+          }
 
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const maxDim = 1024;
-      let width = img.width;
-      let height = img.height;
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
 
-      if (width > height && width > maxDim) {
-        height *= maxDim / width;
-        width = maxDim;
-      } else if (height > maxDim) {
-        width *= maxDim / height;
-        height = maxDim;
-      }
+          const base64Image = canvas.toDataURL('image/jpeg', 0.8);
+          statusBusca.innerText = 'Buscando fotos no servidor...';
 
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, width, height);
-
-      const base64Image = canvas.toDataURL('image/jpeg', 0.8);
-      statusBusca.innerText = 'Buscando fotos no servidor...';
-
-      fetch('/api/search-face', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageBase64: base64Image }),
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.photos && data.photos.length > 0) {
-          // Salva os resultados na sessão do navegador do usuário
-          sessionStorage.setItem('minhas_fotos_colonia', JSON.stringify(data.photos));
-          renderizarFotos(data.photos);
-        } else if (data.error) {
-          statusBusca.innerText = `Erro: ${data.error}`;
-        } else {
-          statusBusca.innerText = 'Nenhuma foto encontrada para este rosto. Tente tirar outra foto com melhor iluminação.';
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        statusBusca.innerText = 'Ocorreu um erro ao conectar com o servidor. Tente novamente.';
+          fetch('/api/search-face', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ imageBase64: base64Image }),
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.photos && data.photos.length > 0) {
+              sessionStorage.setItem('minhas_fotos_colonia', JSON.stringify(data.photos));
+              renderizarFotos(data.photos);
+            } else if (data.error) {
+              statusBusca.innerText = `Erro: ${data.error}`;
+            } else {
+              statusBusca.innerText = 'Nenhuma foto encontrada para este rosto. Tente tirar outra selfie com melhor iluminação.';
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            statusBusca.innerText = 'Ocorreu um erro ao conectar com o servidor. Tente novamente.';
+          });
+        };
       });
-    };
-  });
-</script>
+    </script>
   </body>
 </html>
